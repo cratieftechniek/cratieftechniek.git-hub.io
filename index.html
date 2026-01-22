@@ -15,49 +15,19 @@
 
     /* Hero achtergrond */
     .hero {
-      background-image: url('achtegrond.png'); /* <-- jouw achtergrond */
+      position: relative; /* nodig om de knop IN de foto te plaatsen */
+      background-image: url('achtegrond.png');
       background-size: cover;
       background-position: center;
       height: 100vh;
       width: 100%;
     }
 
-    /* Tekst onder hero */
-    .social-text {
-      text-align: center;
-      font-size: 1.8em;
-      margin-top: 30px;
-      color: #f0e68c;
-      font-weight: 600;
-      text-shadow: 1px 1px 3px #000;
-    }
-
-    /* Instagram knop (oude stijl) */
-    .insta-button {
-      display: inline-block;
-      margin: 25px auto 60px auto;
-      padding: 18px 32px;
-      background-color: #f0e68c;
-      color: #111;
-      font-size: 1.4em;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 8px;
-      box-shadow: 0 0 15px rgba(240, 230, 140, 0.8);
-      transition: 0.2s ease;
-    }
-
-    .insta-button:hover {
-      background-color: #fff8c6;
-      box-shadow: 0 0 25px rgba(255, 255, 200, 1);
-    }
-
-    /* Nieuwe industriële ronde rode knop rechts */
+    /* Industriële ronde rode knop IN de achtergrond */
     .insta-round {
-      position: fixed;
-      top: 50%;
-      right: 30px;
-      transform: translateY(-50%);
+      position: absolute;
+      top: 65%;          /* pas aan voor perfecte positie */
+      right: 8%;         /* pas aan voor perfecte positie */
       width: 95px;
       height: 95px;
       background: radial-gradient(circle at 30% 30%, #b33, #600);
@@ -75,8 +45,8 @@
         0 0 18px rgba(120,0,0,0.8),
         0 6px 12px rgba(0,0,0,0.6);
       transition: 0.2s ease;
-      z-index: 9999;
       text-shadow: 1px 1px 2px #000;
+      z-index: 10;
     }
 
     .insta-round:hover {
@@ -91,22 +61,11 @@
 
 <body>
 
-  <!-- Hero zonder tekst -->
-  <div class="hero"></div>
-
-  <!-- Instagram sectie -->
-  <div class="social-text">Volg ons op Instagram</div>
-
-  <div style="text-align:center;">
-    <a class="insta-button" href="https://instagram.com/creatieftechniek" target="_blank" rel="noopener">
-      📸 @creatieftechniek
-    </a>
+  <!-- Hero met knop erin -->
+  <div class="hero">
+    <button class="insta-round" onclick="window.open('https://instagram.com/creatieftechniek', '_blank')">
+      INSTAGRAM
+    </button>
   </div>
 
-  <!-- Nieuwe ronde industriële knop -->
-  <button class="insta-round" onclick="window.open('https://instagram.com/creatieftechniek', '_blank')">
-    INSTAGRAM
-  </button>
-
 </body>
-</html>
