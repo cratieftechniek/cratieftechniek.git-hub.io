@@ -12,36 +12,38 @@
       height: 100%;
       background-color: #000;
       font-family: 'Segoe UI', sans-serif;
-      overflow: hidden; /* voorkomt scrollen */
+      overflow: hidden;
     }
 
-    /* Achtergrondafbeelding perfect passend binnen 1 scherm */
+    /* Achtergrondafbeelding netjes binnen 1 scherm */
     .hero {
       position: relative;
       width: 100%;
       height: 100vh;
-      background-image: url('achtergrond knop .png'); /* jouw afbeelding */
-      background-size: contain;       /* afbeelding past volledig binnen het scherm */
-      background-repeat: no-repeat;   /* geen herhaling */
-      background-position: center;    /* mooi gecentreerd */
-      background-color: #000;         /* vult randen netjes op */
+      background-image: url('achtergrond knop.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #000;
     }
 
-    /* Klikbare hotspot op de Instagram-knop in de afbeelding */
+    /* Ronde klikbare hotspot */
     .insta-hotspot {
       position: absolute;
-      top: 62%;      /* positie van de knop in de afbeelding */
-      left: 68%;     /* positie van de knop in de afbeelding */
-      width: 140px;  /* grootte van de klikbare zone */
-      height: 140px;
+      top: 58%;        /* VERSCHUIF VERTICAAL */
+      left: 63%;       /* VERSCHUIF HORIZONTAAL */
+      width: 120px;    /* diameter van de ronde hotspot */
+      height: 120px;
+      border-radius: 50%; /* maakt hem rond */
       cursor: pointer;
-      background-color: transparent;
+      background-color: rgba(255, 255, 255, 0); /* volledig transparant */
       border: none;
       z-index: 10;
     }
 
+    /* optioneel: lichte hover glow om te testen */
     .insta-hotspot:hover {
-      outline: 2px solid rgba(255, 255, 150, 0.3); /* optioneel: lichte hover-glow */
+      outline: 2px solid rgba(255, 255, 150, 0.3);
     }
   </style>
 </head>
