@@ -6,50 +6,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
-      height: 100%;
       background-color: #000;
-      font-family: 'Segoe UI', sans-serif;
-      overflow: hidden; /* voorkomt scrollen */
+      overflow: hidden;
     }
 
-    /* Achtergrondafbeelding perfect passend binnen 1 scherm */
-    .hero {
+    .hero-wrapper {
       position: relative;
-      width: 100%;
+      width: 100vw;
       height: 100vh;
-      background-image: url('achtergrond knop .png'); /* jouw afbeelding */
-      background-size: contain;       /* afbeelding past volledig binnen het scherm */
-      background-repeat: no-repeat;   /* geen herhaling */
-      background-position: center;    /* mooi gecentreerd */
-      background-color: #000;         /* vult randen netjes op */
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    /* Klikbare hotspot op de Instagram-knop in de afbeelding */
+    .hero-img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: contain;
+      display: block;
+    }
+
     .insta-hotspot {
       position: absolute;
-      top: 58%;      /* positie van de knop in de afbeelding */
-      left: 63%;     /* positie van de knop in de afbeelding */
-      width: 80px;  /* grootte van de klikbare zone */
-      height: 130px;
-      border-radius: 50%; /* maakt hem rond */
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
       cursor: pointer;
-      background-color: transparent;rgba(255, 255, 255, 0); /* volledig transparant */
+      background-color: transparent;
       border: none;
       z-index: 10;
+
+      /* ✅ Perfecte positie op het woord INSTAGRAM */
+      top: 61.5%;
+      left: 64.2%;
+      transform: translate(-50%, -50%);
     }
 
     .insta-hotspot:hover {
-      outline: 2px solid rgba(255, 255, 150, 0.3); /* optioneel: lichte hover-glow */
+      outline: 2px solid rgba(255, 255, 150, 0.3);
     }
   </style>
 </head>
 
 <body>
 
-  <div class="hero">
+  <div class="hero-wrapper">
+    <img src="achtergrond knop.png" class="hero-img" alt="Creatief Techniek achtergrond">
     <button class="insta-hotspot"
       onclick="window.open('https://instagram.com/creatieftechniek', '_blank')">
     </button>
