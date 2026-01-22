@@ -56,3 +56,63 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Creatief Techniek</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #000;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    /* Achtergrondafbeelding netjes binnen 1 scherm */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background-image: url('achtergrond knop.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #000;
+    }
+
+    /* Ronde klikbare hotspot */
+    .insta-hotspot {
+      position: absolute;
+      top: 58%;        /* VERSCHUIF VERTICAAL */
+      left: 63%;       /* VERSCHUIF HORIZONTAAL */
+      width: 120px;    /* diameter van de ronde hotspot */
+      height: 120px;
+      border-radius: 50%; /* maakt hem rond */
+      cursor: pointer;
+      background-color: rgba(255, 255, 255, 0); /* volledig transparant */
+      border: none;
+      z-index: 10;
+    }
+
+    /* optioneel: lichte hover glow om te testen */
+    .insta-hotspot:hover {
+      outline: 2px solid rgba(255, 255, 150, 0.3);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="hero">
+    <button class="insta-hotspot"
+      onclick="window.open('https://instagram.com/creatieftechniek', '_blank')">
+    </button>
+  </div>
+
+</body>
+</html>
