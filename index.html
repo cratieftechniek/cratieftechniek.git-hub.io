@@ -35,6 +35,7 @@
       display: inline-block;
     }
 
+    /* INSTAGRAM HOTSPOT */
     .insta-hotspot {
       position: absolute;
       width: 120px;
@@ -59,8 +60,8 @@
     /* ⭐ GEÏNTEGREERD LADEBLOK */
     .drawer-block {
       position: absolute;
-      bottom: 160px;   /* hoger */
-      right: 120px;    /* meer naar rechts */
+      bottom: 160px;
+      right: 120px;
       width: 320px;
       display: flex;
       flex-direction: column;
@@ -72,49 +73,40 @@
       position: relative;
       border-radius: 4px;
 
-      /* Donkerder dan achtergrond + zelfde vibe */
-      background: 
+      /* MIX VAN JOUW ACHTERGRONDSTIJL */
+      background:
         linear-gradient(
           145deg,
-          rgba(30, 20, 10, 0.85),
+          rgba(25, 15, 10, 0.85),
           rgba(10, 5, 0, 0.9)
         ),
         repeating-linear-gradient(
           90deg,
-          rgba(0,0,0,0.25) 0px,
-          rgba(0,0,0,0.25) 2px,
-          rgba(255,255,255,0.03) 3px,
-          rgba(255,255,255,0.03) 4px
-        );
+          rgba(0,0,0,0.3) 0px,
+          rgba(0,0,0,0.3) 2px,
+          rgba(255,255,255,0.04) 3px,
+          rgba(255,255,255,0.04) 4px
+        ),
+        radial-gradient(circle at top left,
+          rgba(120, 60, 20, 0.25),
+          transparent 60%);
 
       border: 1px solid rgba(255, 200, 80, 0.15);
       box-shadow:
-        inset 0 0 18px rgba(0,0,0,0.8),
+        inset 0 0 22px rgba(0,0,0,0.85),
         0 8px 22px rgba(0,0,0,0.7);
       overflow: hidden;
     }
 
-    /* Subtiele roest-rand */
-    .drawer::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top left,
-        rgba(120, 60, 20, 0.25),
-        transparent 60%);
-      pointer-events: none;
-    }
-
     .drawer-header {
       width: 100%;
-      padding: 1rem 1.25rem;
+      padding: 0.9rem 1.1rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-
       background: rgba(0,0,0,0.45);
       color: #ffdd66;
-      font-size: 1rem;
+      font-size: 0.9rem;
       letter-spacing: 1px;
       text-transform: uppercase;
       border: none;
@@ -127,7 +119,7 @@
     }
 
     .drawer-icon {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       color: #ffcc55;
       transition: transform 0.25s ease;
       text-shadow: 0 0 6px #000;
@@ -136,9 +128,9 @@
     .drawer-body {
       max-height: 0;
       overflow: hidden;
-      padding: 0 1.25rem;
+      padding: 0 1.1rem;
       color: #ffeec7;
-      font-size: 1rem;
+      font-size: 0.9rem;
       line-height: 1.55;
       background: rgba(0,0,0,0.55);
       border-top: 1px solid rgba(255,255,255,0.1);
@@ -147,9 +139,9 @@
     }
 
     .drawer.open .drawer-body {
-      max-height: 300px;
-      padding-top: 0.75rem;
-      padding-bottom: 1rem;
+      max-height: 260px;
+      padding-top: 0.7rem;
+      padding-bottom: 0.9rem;
     }
 
     .drawer.open .drawer-icon {
@@ -171,6 +163,7 @@
       <!-- ⭐ LADEBLOK -->
       <div class="drawer-block">
 
+        <!-- WIE BEN IK -->
         <div class="drawer" data-drawer>
           <button class="drawer-header">
             <span>Wie ben ik</span>
@@ -186,18 +179,22 @@
           </div>
         </div>
 
+        <!-- WAT DOE IK -->
         <div class="drawer" data-drawer>
           <button class="drawer-header">
-            <span>WEBSITE onder constructie</span>
+            <span>Wat doe ik</span>
             <span class="drawer-icon">+</span>
           </button>
           <div class="drawer-body">
             <p>
-              Hier kun je jouw diensten, projecten of specialisaties invullen.
+              Ik ontwerp en bouw maatwerk voor theater, podiumkunst, installaties en unieke objecten.
+              Van mechanische oplossingen tot hout- en metaalwerk: ik vertaal ideeën naar iets dat echt werkt.
+              Geen standaard onderdelen — alles wordt aangepast, versterkt of opnieuw bedacht tot het klopt.
             </p>
           </div>
         </div>
 
+        <!-- WAAROM MET MIJ WERKEN -->
         <div class="drawer" data-drawer>
           <button class="drawer-header">
             <span>Waarom met mij werken</span>
@@ -206,8 +203,8 @@
           <div class="drawer-body">
             <p>
               Ik denk mee, bouw mee en los problemen op met mijn handen.
-Geen standaard oplossingen, maar maatwerk dat werkt — stevig, slim en betrouwbaar.
-Ik combineer creativiteit met techniek, zodat ideeën niet alleen mooi zijn, maar ook functioneren.
+              Geen standaard oplossingen, maar maatwerk dat werkt — stevig, slim en betrouwbaar.
+              Ik combineer creativiteit met techniek, zodat ideeën niet alleen mooi zijn, maar ook functioneren.
             </p>
           </div>
         </div>
