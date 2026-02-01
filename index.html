@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <title>Creatief Techniek</title>
+  <title>Creatief Techniek – Mad Max Lades</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -11,6 +11,7 @@
       background-color: #000;
       height: 100%;
       overflow: hidden;
+      font-family: Arial, sans-serif;
     }
 
     .hero-wrapper {
@@ -44,7 +45,6 @@
       border: none;
       z-index: 10;
 
-      /* ✅ hotspot positie binnen de afbeelding zelf */
       top: 61.5%;
       left: 48.5%;
       transform: translate(-50%, -50%);
@@ -55,6 +55,94 @@
       box-shadow: 0 0 20px rgba(255, 220, 100, 0.4),
                   0 0 40px rgba(255, 220, 100, 0.2);
     }
+
+    /* ⭐ MAD MAX LADEBLOK */
+    .drawer-block {
+      position: absolute;
+      bottom: 120px;   /* hoger */
+      right: 80px;     /* meer naar rechts */
+      width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      z-index: 30;
+    }
+
+    .drawer {
+      border-radius: 6px;
+      overflow: hidden;
+      background: url('https://i.imgur.com/8uY8YpP.jpeg'); /* verweerd hout */
+      background-size: cover;
+      background-position: center;
+      border: 2px solid rgba(80, 40, 10, 0.6);
+      box-shadow:
+        0 12px 28px rgba(0,0,0,0.7),
+        inset 0 0 18px rgba(0,0,0,0.6);
+      position: relative;
+    }
+
+    /* Roestige scharnieren links */
+    .drawer::before {
+      content: "";
+      position: absolute;
+      left: -22px;
+      top: 18px;
+      width: 18px;
+      height: 60px;
+      background: url('https://i.imgur.com/2p5x6pC.png'); /* roestige hinge */
+      background-size: cover;
+      filter: drop-shadow(0 0 6px rgba(0,0,0,0.8));
+    }
+
+    .drawer-header {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(0,0,0,0.45);
+      color: #ffdd88;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      text-shadow: 0 0 6px #000;
+    }
+
+    .drawer-header:hover {
+      background: rgba(0,0,0,0.6);
+    }
+
+    .drawer-icon {
+      font-size: 1.4rem;
+      color: #ffcc55;
+      transition: transform 0.25s ease;
+      text-shadow: 0 0 6px #000;
+    }
+
+    .drawer-body {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 1.25rem;
+      color: #ffeec7;
+      font-size: 1rem;
+      line-height: 1.55;
+      background: rgba(0,0,0,0.55);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      text-shadow: 0 0 6px #000;
+    }
+
+    .drawer.open .drawer-body {
+      max-height: 300px;
+      padding-top: 0.75rem;
+      padding-bottom: 1rem;
+    }
+
+    .drawer.open .drawer-icon {
+      transform: rotate(45deg);
+    }
   </style>
 </head>
 
@@ -63,11 +151,76 @@
   <div class="hero-wrapper">
     <div class="image-container">
       <img src="achtergrond knop.png" class="hero-img" alt="Creatief Techniek achtergrond">
+
       <button class="insta-hotspot"
         onclick="window.open('https://instagram.com/creatieftechniek', '_blank')">
       </button>
+
+      <!-- ⭐ LADEBLOK -->
+      <div class="drawer-block">
+
+        <!-- LADE 1: WIE BEN IK -->
+        <div class="drawer" data-drawer>
+          <button class="drawer-header">
+            <span>Wie ben ik</span>
+            <span class="drawer-icon">+</span>
+          </button>
+          <div class="drawer-body">
+            <p>
+              Ik ben Gertjan Ruigrok — een maker met een sterke verbeeldingskracht en liefde voor vakmanschap.
+              Ik ontwerp en bouw maatwerk voor theater, podiumkunst, design en kunstobjecten —
+              van prototypes en mechanische oplossingen tot unieke vormen in hout en metaal.
+              Ik werk graag samen met makers en gezelschappen om ideeën tastbaar te maken.
+            </p>
+          </div>
+        </div>
+
+        <!-- LADE 2 -->
+        <div class="drawer" data-drawer>
+          <button class="drawer-header">
+            <span>Wat doe ik</span>
+            <span class="drawer-icon">+</span>
+          </button>
+          <div class="drawer-body">
+            <p>
+              Hier kun je jouw diensten, projecten of specialisaties invullen.
+            </p>
+          </div>
+        </div>
+
+        <!-- LADE 3 -->
+        <div class="drawer" data-drawer>
+          <button class="drawer-header">
+            <span>Waarom met mij werken</span>
+            <span class="drawer-icon">+</span>
+          </button>
+          <div class="drawer-body">
+            <p>
+              Hier kun je jouw meerwaarde, werkwijze of visie neerzetten.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
+
+  <script>
+    document.querySelectorAll('[data-drawer]').forEach((drawer) => {
+      const header = drawer.querySelector('.drawer-header');
+
+      header.addEventListener('click', () => {
+        const isOpen = drawer.classList.contains('open');
+
+        document.querySelectorAll('[data-drawer]').forEach((d) => {
+          d.classList.remove('open');
+        });
+
+        if (!isOpen) drawer.classList.add('open');
+      });
+    });
+  </script>
 
 </body>
 </html>
