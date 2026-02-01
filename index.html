@@ -46,15 +46,15 @@
                   0 0 40px rgba(255, 220, 100, 0.2);
     }
 
-    /* Ladeblok – exact dezelfde stijl als achtergrond */
+    /* Ladeblok – zelfde stijl als achtergrond */
     .drawer-block {
       position: absolute;
       bottom: 150px;
-      right: 90px; /* iets meer naar rechts */
+      right: 110px; /* iets meer naar rechts */
       width: 340px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 10px; /* dichter op elkaar */
     }
 
     .drawer {
@@ -119,7 +119,7 @@
       transform: rotate(45deg);
     }
 
-    /* Responsive – tablet */
+    /* Tablet */
     @media (max-width: 1024px) {
       .drawer-block {
         right: 40px;
@@ -128,21 +128,39 @@
       }
     }
 
-    /* Responsive – telefoon */
+    /* Telefoon */
     @media (max-width: 600px) {
+
       .drawer-block {
         right: 50%;
         transform: translateX(50%);
-        bottom: 10px;
-        width: 90%;
+        bottom: 10px; /* lager zodat hij niet over Instagram valt */
+        width: 92%;
         max-width: 340px;
+        gap: 6px; /* dichter op elkaar */
+      }
+
+      .drawer-header {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.8rem;
+      }
+
+      .drawer-body {
+        font-size: 0.8rem;
+        line-height: 1.4;
+        padding: 0 0.8rem;
+      }
+
+      .drawer.open .drawer-body {
+        max-height: 180px; /* compacter */
+        padding-top: 0.5rem;
+        padding-bottom: 0.6rem;
       }
 
       .insta-hotspot {
-        width: 58px;
+        top: 58%;
+        width: 80px;
         height: 80px;
-        top:58%;
-        left: 50%;
       }
     }
   </style>
