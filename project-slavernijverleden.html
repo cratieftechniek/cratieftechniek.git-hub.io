@@ -85,12 +85,13 @@
     .slideshow-container {
         position: relative;
         width: 100%;
-        height: 480px; /* NIEUW: hogere hoogte voor desktop */
+        height: 480px; /* hogere hoogte */
         overflow: hidden;
         border-radius: 10px;
         border: 1px solid rgba(255,255,255,0.2);
         cursor: pointer;
         margin-top: 40px;
+        background: #000;
     }
 
     .slide {
@@ -102,7 +103,8 @@
     .slide img {
         width: 100%;
         height: 100%;
-        object-fit: cover; /* professioneel */
+        object-fit: contain; /* FOTO VOLLEDIG ZICHTBAAR */
+        background: #000;
     }
 
     /* FULLSCREEN: hele foto zichtbaar */
@@ -154,6 +156,20 @@
         background-color: var(--accent);
     }
 
+    /* FULLSCREEN SLUITKNOP */
+    .fullscreen-close {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        font-size: 32px;
+        color: var(--accent);
+        background: rgba(0,0,0,0.6);
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        z-index: 9999;
+        display: none;
+    }
 </style>
 </head>
 
@@ -199,6 +215,9 @@
 </p>
 
 <h2>Foto’s</h2>
+
+<!-- FULLSCREEN SLUITKNOP -->
+<div id="fsClose" class="fullscreen-close" onclick="closeFullscreen()">✕</div>
 
 <!-- SLIDESHOW -->
 <div class="slideshow-container" onclick="openFullscreen(this)">
@@ -277,8 +296,11 @@ setInterval(() => {
     }
 }, 4000);
 
-/* FULLSCREEN */
+/* FULLSCREEN OPENEN */
 function openFullscreen(elem) {
+    const fsBtn = document.getElementById("fsClose");
+    fsBtn.style.display = "block";
+
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
     } else if (elem.webkitRequestFullscreen) {
@@ -287,6 +309,27 @@ function openFullscreen(elem) {
         elem.msRequestFullscreen();
     }
 }
+
+/* FULLSCREEN SLUITEN */
+function closeFullscreen() {
+    const fsBtn = document.getElementById("fsClose");
+    fsBtn.style.display = "none";
+
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+    }
+}
+
+/* Sluitknop verbergen wanneer fullscreen wordt verlaten */
+document.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement) {
+        document.getElementById("fsClose").style.display = "none";
+    }
+});
 </script>
 
 </body>
