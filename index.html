@@ -100,9 +100,25 @@
         color: var(--accent);
     }
 
+    /* VERWIJDER GELE ► MARKER */
+    summary::-webkit-details-marker { display: none; }
+    summary::marker { display: none; }
+
     details p { 
         margin-top: 15px; 
         line-height: 1.6; 
+    }
+
+    /* E-MAIL STIJL */
+    .email-link {
+        color: #4da3ff;
+        font-weight: bold;
+        text-decoration: underline;
+        font-size: 18px;
+    }
+
+    .email-link:hover {
+        color: #82c3ff;
     }
 
     /* MOBIEL */
@@ -146,31 +162,38 @@
 
 <section class="hero">
     <div class="content">
+
         <details>
-            <summary>Wie ben ik </summary>
+            <summary>Wie ben ik</summary>
             <p>
-          Ik ben Gertjan Ruigrok — een maker met een sterke verbeeldingskracht en liefde voor vakmanschap.
-              Ik ontwerp en bouw maatwerk voor theater, podiumkunst, design en kunstobjecten —
-              van prototypes en mechanische oplossingen tot unieke vormen in hout en metaal.
-              Ik werk graag samen met makers en gezelschappen om ideeën tastbaar te maken.
+                Ik ben Gertjan Ruigrok — een maker met een sterke verbeeldingskracht en liefde voor vakmanschap.
+                Ik ontwerp en bouw maatwerk voor theater, podiumkunst, design en kunstobjecten —
+                van prototypes en mechanische oplossingen tot unieke vormen in hout en metaal.
+                Ik werk graag samen met makers en gezelschappen om ideeën tastbaar te maken.
             </p>
         </details>
 
         <details>
-            <summary>waarom met mij werken?</summary>
+            <summary>Waarom met mij werken?</summary>
             <p>
-                             Ik denk mee, bouw mee en los problemen op met mijn handen.
-Geen standaard oplossingen, maar maatwerk dat werkt — stevig, slim en betrouwbaar.
-Ik combineer creativiteit met techniek, zodat ideeën niet alleen mooi zijn, maar ook functioneren.
+                Ik denk mee, bouw mee en los problemen op met mijn handen.
+                Geen standaard oplossingen, maar maatwerk dat werkt — stevig, slim en betrouwbaar.
+                Ik combineer creativiteit met techniek, zodat ideeën niet alleen mooi zijn, maar ook functioneren.
             </p>
         </details>
 
-        <details>
+        <!-- CONTACT ALTIJD OPEN -->
+        <details open>
             <summary>Contact</summary>
             <p>
-                Voor vragen, opdrachten of samenwerkingen kun je altijd contact opnemen via Instagram of e‑mail creatieftechniek@hotmail.com.
+                Voor vragen, opdrachten of samenwerkingen kun je altijd contact opnemen via Instagram of e‑mail:<br><br>
+
+                <a href="mailto:creatieftechniek@hotmail.com" class="email-link">
+                    creatieftechniek@hotmail.com
+                </a>
             </p>
         </details>
+
     </div>
 </section>
 
