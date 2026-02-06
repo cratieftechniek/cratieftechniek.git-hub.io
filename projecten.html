@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projecten – Creatief Techniek</title>
+
+<style>
+    :root { --accent: #f5d08a; }
+
+    body {
+        margin: 0;
+        background: #000;
+        color: #fff;
+        font-family: Arial, sans-serif;
+    }
+
+    .wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        position: relative;
+    }
+
+    .wrapper::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top left, rgba(255,200,120,0.18), transparent);
+        z-index: 0;
+    }
+
+    h1 {
+        text-align: center;
+        color: var(--accent);
+        margin-bottom: 40px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .project-card {
+        background: rgba(0,0,0,0.55);
+        border: 1px solid rgba(255,200,120,0.25);
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+        backdrop-filter: blur(4px);
+        position: relative;
+        z-index: 2;
+    }
+
+    .project-card h2 { margin: 0 0 10px; color: var(--accent); }
+    .project-card a { color: var(--accent); font-weight: bold; text-decoration: none; }
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<h1>Projecten</h1>
+
+<div class="project-card">
+    <h2>Gesprek Slavernijverleden</h2>
+    <p>3D‑werkzaamheden en technische montageconstructies voor de installatie.</p>
+    <a href="project-slavernijverleden.html">Bekijk project →</a>
+</div>
+
+<div class="project-card">
+    <h2>3D‑geprinte muilkorf voor Cane Corso</h2>
+    <p>Maatwerk ontwerp en 3D‑print voor Orthopedieren.</p>
+    <a href="project-muilkorf.html">Bekijk project →</a>
+</div>
+
+<!-- Later kun je hier meer projecten toevoegen -->
+
+</div>
+
+</body>
+</html>
