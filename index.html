@@ -33,23 +33,32 @@
         background: radial-gradient(circle at top left, rgba(255,200,120,0.18), transparent);
     }
 
-    header {
+    /* HEADER */
+    .top-header {
         position: absolute;
         top: 20px;
-        left: 20px;
         right: 20px;
         display: flex;
-        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
         z-index: 10;
     }
 
+    .follow-text {
+        font-size: 18px;
+        color: var(--accent);
+        font-weight: bold;
+    }
+
     .insta-icon img {
-        width: 32px;
-        filter: invert(100%);
-        opacity: 0.85;
+        width: 55px;
+        opacity: 0.9;
         transition: 0.2s;
     }
-    .insta-icon img:hover { opacity: 1; }
+
+    .insta-icon img:hover {
+        opacity: 1;
+    }
 
     .nav-btn {
         color: #fff;
@@ -59,7 +68,6 @@
         text-decoration: none;
         border: 1px solid rgba(255,255,255,0.35);
         font-weight: bold;
-        margin-left: 12px;
     }
 
     /* CONTENT BLOKKEN */
@@ -107,16 +115,18 @@
 
 <div class="hero">
 
-    <header>
+    <!-- HEADER -->
+    <header class="top-header">
+        <div class="follow-text">Volg ons op:</div>
+
         <a href="https://www.instagram.com/creatieftechniek" target="_blank" class="insta-icon">
             <img src="instagram.png" alt="Instagram">
         </a>
 
-        <div>
-            <a href="projecten.html" class="nav-btn">Projecten</a>
-        </div>
+        <a href="projecten.html" class="nav-btn">Projecten</a>
     </header>
 
+    <!-- CONTENT BLOKKEN -->
     <div class="content">
 
         <details>
