@@ -63,79 +63,89 @@
     .wrapper {
         max-width: 900px;
         margin: 0 auto;
-        padding: 120px 20px 40px;
+        padding: 140px 20px 40px;
         position: relative;
-    }
-
-    .wrapper::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(circle at top left, rgba(255,200,120,0.18), transparent);
-        z-index: 0;
     }
 
     h1 {
         color: var(--accent);
         margin-bottom: 20px;
-        position: relative;
-        z-index: 2;
     }
 
     h2 {
         color: var(--accent);
         margin-top: 30px;
-        position: relative;
-        z-index: 2;
     }
 
     p {
         line-height: 1.6;
-        position: relative;
-        z-index: 2;
     }
 
-    a { color: var(--accent); }
-
-    /* GALERIJ */
-    .gallery {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        margin-top: 30px;
+    /* SLIDESHOW */
+    .slideshow-container {
         position: relative;
-        z-index: 2;
-    }
-
-    .gallery img {
-        width: calc(50% - 10px);
-        border-radius: 8px;
+        max-width: 100%;
+        margin: 40px auto;
+        overflow: hidden;
+        border-radius: 10px;
         border: 1px solid rgba(255,255,255,0.2);
     }
 
-    /* MOBIEL & TABLET */
-    @media (max-width: 1024px) {
-        .nav-link {
-            padding: 6px 12px;
-            font-size: 14px;
-        }
-
-        .insta-icon img {
-            width: 30px;
-        }
-
-        .wrapper {
-            padding: 100px 20px 40px;
-        }
-
-        .gallery img {
-            width: 100%;
-        }
-
-        h1 {
-            font-size: 26px;
-        }
+    .slide {
+        display: none;
+        width: 100%;
     }
+
+    .slide img {
+        width: 100%;
+        display: block;
+    }
+
+    /* Pijltjes */
+    .prev, .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        margin-top: -22px;
+        color: var(--accent);
+        font-weight: bold;
+        font-size: 22px;
+        transition: 0.3s;
+        user-select: none;
+        background: rgba(0,0,0,0.4);
+        border-radius: 6px;
+    }
+
+    .prev:hover, .next:hover {
+        background: rgba(255,200,120,0.2);
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    /* Bolletjes */
+    .dots {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .dot {
+        cursor: pointer;
+        height: 12px;
+        width: 12px;
+        margin: 0 4px;
+        background-color: #444;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.3s;
+    }
+
+    .active, .dot:hover {
+        background-color: var(--accent);
+    }
+
 </style>
 </head>
 
@@ -181,25 +191,84 @@
 </p>
 
 <h2>Foto’s</h2>
-<p>
-    De foto’s hieronder laten het proces zien: het verbeteren van 3D‑modellen, het printklaar maken van onderdelen en het uitwerken van montageoplossingen voor de uiteindelijke installatie.
-</p>
 
-<div class="gallery">
-    <img src="slavernij1.jpg" alt="">
-    <img src="slavernij2.jpg" alt="">
-    <img src="slavernij3.jpg" alt="">
-    <img src="slavernij4.jpg" alt="">
-    <img src="slavernij5.jpg" alt="">
-    <img src="slavernij6.jpg" alt="">
-    <img src="slavernij7.jpg" alt="">
-    <img src="slavernij8.jpg" alt="">
-    <img src="slavernij9.jpg" alt="">
-    <img src="slavernij10.jpg" alt="">
-    <img src="slavernij11.jpg" alt="">
+<!-- SLIDESHOW -->
+<div class="slideshow-container">
+
+    <div class="slide"><img src="slavernij1.jpg"></div>
+    <div class="slide"><img src="slavernij2.jpg"></div>
+    <div class="slide"><img src="slavernij3.jpg"></div>
+    <div class="slide"><img src="slavernij4.jpg"></div>
+    <div class="slide"><img src="slavernij5.jpg"></div>
+    <div class="slide"><img src="slavernij6.jpg"></div>
+    <div class="slide"><img src="slavernij7.jpg"></div>
+    <div class="slide"><img src="slavernij8.jpg"></div>
+    <div class="slide"><img src="slavernij9.jpg"></div>
+    <div class="slide"><img src="slavernij10.jpg"></div>
+    <div class="slide"><img src="slavernij11.jpg"></div>
+
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+</div>
+
+<div class="dots">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    <span class="dot" onclick="currentSlide(5)"></span>
+    <span class="dot" onclick="currentSlide(6)"></span>
+    <span class="dot" onclick="currentSlide(7)"></span>
+    <span class="dot" onclick="currentSlide(8)"></span>
+    <span class="dot" onclick="currentSlide(9)"></span>
+    <span class="dot" onclick="currentSlide(10)"></span>
+    <span class="dot" onclick="currentSlide(11)"></span>
 </div>
 
 </div>
+
+<script>
+let slideIndex = 1;
+let autoPlay = true;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+    autoPlay = false;
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    autoPlay = false;
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("slide");
+    let dots = document.getElementsByClassName("dot");
+
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+}
+
+setInterval(() => {
+    if (autoPlay) {
+        slideIndex++;
+        showSlides(slideIndex);
+    }
+}, 4000);
+</script>
 
 </body>
 </html>
