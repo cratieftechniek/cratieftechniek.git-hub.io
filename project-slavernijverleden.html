@@ -84,38 +84,40 @@
     /* SLIDESHOW */
     .slideshow-container {
         position: relative;
-        max-width: 100%;
-        margin: 40px auto;
+        width: 100%;
+        height: 520px; /* vaste hoogte */
         overflow: hidden;
         border-radius: 10px;
         border: 1px solid rgba(255,255,255,0.2);
+        cursor: pointer;
+        margin-top: 40px;
     }
 
     .slide {
         display: none;
         width: 100%;
+        height: 100%;
     }
 
     .slide img {
         width: 100%;
-        display: block;
+        height: 100%;
+        object-fit: cover; /* gelijke grootte */
     }
 
     /* Pijltjes */
     .prev, .next {
-        cursor: pointer;
         position: absolute;
         top: 50%;
-        width: auto;
+        transform: translateY(-50%);
         padding: 16px;
-        margin-top: -22px;
-        color: var(--accent);
-        font-weight: bold;
-        font-size: 22px;
-        transition: 0.3s;
-        user-select: none;
         background: rgba(0,0,0,0.4);
         border-radius: 6px;
+        font-size: 26px;
+        color: var(--accent);
+        cursor: pointer;
+        user-select: none;
+        z-index: 10;
     }
 
     .prev:hover, .next:hover {
@@ -128,7 +130,7 @@
     /* Bolletjes */
     .dots {
         text-align: center;
-        margin-top: 10px;
+        margin-top: 12px;
     }
 
     .dot {
@@ -193,7 +195,7 @@
 <h2>Foto’s</h2>
 
 <!-- SLIDESHOW -->
-<div class="slideshow-container">
+<div class="slideshow-container" onclick="openFullscreen(this)">
 
     <div class="slide"><img src="slavernij1.jpg"></div>
     <div class="slide"><img src="slavernij2.jpg"></div>
@@ -207,8 +209,8 @@
     <div class="slide"><img src="slavernij10.jpg"></div>
     <div class="slide"><img src="slavernij11.jpg"></div>
 
-    <a class="prev" onclick="plusSlides(-1)">❮</a>
-    <a class="next" onclick="plusSlides(1)">❯</a>
+    <a class="prev" onclick="event.stopPropagation(); plusSlides(-1)">❮</a>
+    <a class="next" onclick="event.stopPropagation(); plusSlides(1)">❯</a>
 </div>
 
 <div class="dots">
@@ -268,6 +270,17 @@ setInterval(() => {
         showSlides(slideIndex);
     }
 }, 4000);
+
+/* FULLSCREEN */
+function openFullscreen(elem) {
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+    }
+}
 </script>
 
 </body>
