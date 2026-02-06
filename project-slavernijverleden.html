@@ -85,7 +85,7 @@
     .slideshow-container {
         position: relative;
         width: 100%;
-        height: 520px; /* vaste hoogte */
+        height: 400px; /* NIEUW: lagere hoogte */
         overflow: hidden;
         border-radius: 10px;
         border: 1px solid rgba(255,255,255,0.2);
@@ -102,7 +102,13 @@
     .slide img {
         width: 100%;
         height: 100%;
-        object-fit: cover; /* gelijke grootte */
+        object-fit: cover; /* professioneel, maar minder afsnijding door lagere hoogte */
+    }
+
+    /* FULLSCREEN: hele foto zichtbaar */
+    :fullscreen .slide img {
+        object-fit: contain;
+        background: #000;
     }
 
     /* Pijltjes */
