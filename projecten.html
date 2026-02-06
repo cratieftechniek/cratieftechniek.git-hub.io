@@ -15,6 +15,7 @@
         font-family: Arial, sans-serif;
     }
 
+    /* NAVIGATIE */
     .nav-header {
         position: absolute;
         top: 20px;
@@ -58,10 +59,11 @@
         opacity: 1;
     }
 
+    /* PAGINA LAYOUT */
     .wrapper {
         max-width: 900px;
         margin: 0 auto;
-        padding: 40px 20px;
+        padding: 120px 20px 40px;
         position: relative;
     }
 
@@ -94,6 +96,35 @@
 
     .project-card h2 { margin: 0 0 10px; color: var(--accent); }
     .project-card a { color: var(--accent); font-weight: bold; text-decoration: none; }
+
+    /* MOBIEL & TABLET FIXES */
+    @media (max-width: 1024px) {
+
+        /* Navigatie kleiner */
+        .nav-link {
+            padding: 6px 12px;
+            font-size: 14px;
+        }
+
+        .insta-icon img {
+            width: 30px;
+        }
+
+        /* Wrapper meer ruimte boven */
+        .wrapper {
+            padding: 100px 20px 40px;
+        }
+
+        /* Projectkaarten rustiger */
+        .project-card {
+            padding: 16px;
+        }
+
+        h1 {
+            font-size: 26px;
+            margin-bottom: 30px;
+        }
+    }
 </style>
 </head>
 
