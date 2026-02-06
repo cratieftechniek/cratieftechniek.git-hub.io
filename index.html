@@ -15,6 +15,50 @@
         font-family: Arial, sans-serif;
     }
 
+    /* NAVIGATIE */
+    .nav-header {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        z-index: 50;
+    }
+
+    .nav-link {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: bold;
+        background: rgba(0,0,0,0.6);
+        padding: 10px 18px;
+        border-radius: 8px;
+        border: 1px solid rgba(255,200,120,0.25);
+        transition: 0.2s;
+    }
+
+    .nav-link:hover {
+        background: rgba(255,200,120,0.15);
+    }
+
+    .nav-follow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--accent);
+        font-weight: bold;
+    }
+
+    .insta-icon img {
+        width: 45px;
+        opacity: 0.9;
+        transition: 0.2s;
+    }
+
+    .insta-icon img:hover {
+        opacity: 1;
+    }
+
     /* HERO */
     .hero {
         position: relative;
@@ -31,43 +75,6 @@
         position: absolute;
         inset: 0;
         background: radial-gradient(circle at top left, rgba(255,200,120,0.18), transparent);
-    }
-
-    /* HEADER */
-    .top-header {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        z-index: 10;
-    }
-
-    .follow-text {
-        font-size: 18px;
-        color: var(--accent);
-        font-weight: bold;
-    }
-
-    .insta-icon img {
-        width: 55px;
-        opacity: 0.9;
-        transition: 0.2s;
-    }
-
-    .insta-icon img:hover {
-        opacity: 1;
-    }
-
-    .nav-btn {
-        color: #fff;
-        background: rgba(0,0,0,0.6);
-        padding: 12px 22px;
-        border-radius: 10px;
-        text-decoration: none;
-        border: 1px solid rgba(255,255,255,0.35);
-        font-weight: bold;
     }
 
     /* CONTENT BLOKKEN */
@@ -113,20 +120,24 @@
 
 <body>
 
-<div class="hero">
+<!-- NAVIGATIE -->
+<header class="nav-header">
 
-    <!-- HEADER -->
-    <header class="top-header">
-        <div class="follow-text">Volg ons op:</div>
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="projecten.html" class="nav-link">Projecten</a>
 
+    <div class="nav-follow">
+        <span>Volg ons op:</span>
         <a href="https://www.instagram.com/creatieftechniek" target="_blank" class="insta-icon">
             <img src="instagram.png" alt="Instagram">
         </a>
+    </div>
 
-        <a href="projecten.html" class="nav-btn">Projecten</a>
-    </header>
+</header>
 
-    <!-- CONTENT BLOKKEN -->
+<!-- HERO + CONTENT -->
+<div class="hero">
+
     <div class="content">
 
         <details>
