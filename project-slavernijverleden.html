@@ -279,17 +279,17 @@
 
 <div class="slideshow-container" onclick="openFullscreen(this)">
 
-    <div class="slide"><img src="slavernij1.jpg"></div>
-    <div class="slide"><img src="slavernij2.jpg"></div>
-    <div class="slide"><img src="slavernij3.jpg"></div>
-    <div class="slide"><img src="slavernij4.jpg"></div>
-    <div class="slide"><img src="slavernij5.jpg"></div>
-    <div class="slide"><img src="slavernij6.jpg"></div>
-    <div class="slide"><img src="slavernij7.jpg"></div>
-    <div class="slide"><img src="slavernij8.jpg"></div>
-    <div class="slide"><img src="slavernij9.jpg"></div>
-    <div class="slide"><img src="slavernij10.jpg"></div>
-    <div class="slide"><img src="slavernij11.jpg"></div>
+    <div class="slide"><img src="slavernij1.jpg" alt=""></div>
+    <div class="slide"><img src="slavernij2.jpg" alt=""></div>
+    <div class="slide"><img src="slavernij3.jpg" alt=""></div>
+    <div class="slide"><img src="slavernij4.jpg" alt=""></div>
+    <div class="slide"><img src="slavernij5.jpg" alt=""></div>
+    <div class="slide"><img src="slavernij6.jpg" alt=""></div>
+    <div class="slide"><img src="slavernij7.jpg" alt=""></div>
+    <div class="slide"><img src="slavernij8.jpg" alt=""></div>
+    <div class="slide"><img src="slavernij9.jpg" alt=""></div>
+    <div class="slide"><img src="slavernij10.jpg" alt=""></div>
+    <div class="slide"><img src="slavernij11.jpg" alt=""></div>
 
     <a class="prev" onclick="event.stopPropagation(); plusSlides(-1)">❮</a>
     <a class="next" onclick="event.stopPropagation(); plusSlides(1)">❯</a>
@@ -312,4 +312,78 @@
 </div>
 
 <script>
-let
+let slideIndex = 1;
+let autoPlay = true;
+
+showSlides(slideIndex);
+
+function plusSlides(n) {
+    autoPlay = false;
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    autoPlay = false;
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    let i;
+    const slides = document.getElementsByClassName("slide");
+    const dots = document.getElementsByClassName("dot");
+
+    if (slides.length === 0) return;
+
+    if (n > slides.length) { slideIndex = 1; }
+    if (n < 1) { slideIndex = slides.length; }
+
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+
+    slides[slideIndex - 1].style.display = "block";
+    if (dots[slideIndex - 1]) {
+        dots[slideIndex - 1].className += " active";
+    }
+}
+
+setInterval(() => {
+    if (autoPlay) {
+        slideIndex++;
+        showSlides(slideIndex);
+    }
+}, 4000);
+
+/* FULLSCREEN OPENEN */
+function openFullscreen(elem) {
+    const fsBtn = document.getElementById("fsClose");
+    fsBtn.style.display = "block";
+
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    }
+}
+
+/* FULLSCREEN SLUITEN */
+function closeFullscreen() {
+    const fsBtn = document.getElementById("fsClose");
+    fsBtn.style.display = "none";
+
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    }
+}
+
+document.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement) {
+        document.getElementById("fsClose").style.display = "none";
+    }
+});
+</script>
+
+</body>
+</html>
