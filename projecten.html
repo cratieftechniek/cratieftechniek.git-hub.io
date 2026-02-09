@@ -63,66 +63,96 @@
     .wrapper {
         max-width: 900px;
         margin: 0 auto;
-        padding: 120px 20px 40px;
+        padding: 140px 20px 40px;
         position: relative;
-    }
-
-    .wrapper::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(circle at top left, rgba(255,200,120,0.18), transparent);
-        z-index: 0;
     }
 
     h1 {
         text-align: center;
         color: var(--accent);
         margin-bottom: 40px;
-        position: relative;
-        z-index: 2;
     }
 
+    /* PROJECT KAARTEN */
     .project-card {
-        background: rgba(0,0,0,0.55);
-        border: 1px solid rgba(255,200,120,0.25);
+        display: block;
+        background: rgba(255,255,255,0.05);
         padding: 20px;
         border-radius: 10px;
         margin-bottom: 25px;
+        text-decoration: none;
+        color: #fff;
+        border: 1px solid rgba(255,255,255,0.15);
+        transition: 0.25s;
         backdrop-filter: blur(4px);
-        position: relative;
-        z-index: 2;
     }
 
-    .project-card h2 { margin: 0 0 10px; color: var(--accent); }
-    .project-card a { color: var(--accent); font-weight: bold; text-decoration: none; }
+    .project-card:hover {
+        background: rgba(255,255,255,0.12);
+        border-color: rgba(255,255,255,0.3);
+        transform: translateY(-3px);
+    }
 
-    /* MOBIEL & TABLET FIXES */
-    @media (max-width: 1024px) {
+    .project-card h2 {
+        margin-top: 0;
+        color: var(--accent);
+    }
 
-        /* Navigatie kleiner */
+    .project-card p {
+        margin-bottom: 10px;
+    }
+
+    .project-link {
+        display: inline-block;
+        margin-top: 10px;
+        font-weight: bold;
+        color: var(--accent);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+        .nav-header {
+            top: 10px;
+            right: 10px;
+            gap: 15px;
+        }
         .nav-link {
-            padding: 6px 12px;
+            padding: 8px 14px;
             font-size: 14px;
+        }
+        .insta-icon img {
+            width: 32px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .nav-header {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.6);
+            padding: 8px 12px;
+            border-radius: 10px;
+            backdrop-filter: blur(4px);
+            gap: 10px;
+            z-index: 999;
+        }
+
+        .nav-link {
+            padding: 6px 10px;
+            font-size: 13px;
         }
 
         .insta-icon img {
-            width: 30px;
+            width: 28px;
         }
 
-        /* Meer ruimte boven */
         .wrapper {
-            padding: 100px 20px 40px;
-        }
-
-        /* Projectkaarten rustiger */
-        .project-card {
-            padding: 16px;
+            padding: 120px 15px 40px;
         }
 
         h1 {
             font-size: 26px;
-            margin-bottom: 30px;
         }
     }
 </style>
@@ -148,17 +178,19 @@
 
 <h1>Projecten</h1>
 
-<div class="project-card">
+<!-- PROJECT 1 -->
+<a href="project-slavernijverleden.html" class="project-card">
     <h2>Gesprek Slavernijverleden</h2>
     <p>3D‑werkzaamheden en technische montageconstructies voor de installatie.</p>
-    <a href="project-slavernijverleden.html">Bekijk project →</a>
-</div>
+    <span class="project-link">Bekijk project →</span>
+</a>
 
-<div class="project-card">
+<!-- PROJECT 2 -->
+<a href="project-muilkorf.html" class="project-card">
     <h2>3D‑geprinte muilkorf voor Cane Corso</h2>
     <p>Maatwerk ontwerp en 3D‑print voor Orthopedieren.</p>
-    <a href="project-muilkorf.html">Bekijk project →</a>
-</div>
+    <span class="project-link">Bekijk project →</span>
+</a>
 
 </div>
 
