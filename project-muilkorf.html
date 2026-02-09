@@ -13,6 +13,17 @@
         background: #000;
         color: #fff;
         font-family: Arial, sans-serif;
+        position: relative;
+    }
+
+    /* LICHTE TINTEN / GLOW ACHTERGROND */
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(circle at top left, rgba(255,200,120,0.18), transparent 70%);
+        z-index: -1;
+        pointer-events: none;
     }
 
     /* NAVIGATIE */
@@ -65,6 +76,7 @@
         margin: 0 auto;
         padding: 140px 20px 40px;
         position: relative;
+        z-index: 2;
     }
 
     h1 {
@@ -107,13 +119,6 @@
         background: #000;
     }
 
-    /* FULLSCREEN */
-    :fullscreen .slide img {
-        object-fit: contain;
-        background: #000;
-    }
-
-    /* Pijltjes */
     .prev, .next {
         position: absolute;
         top: 50%;
@@ -135,7 +140,6 @@
     .prev { left: 10px; }
     .next { right: 10px; }
 
-    /* Bolletjes */
     .dots {
         text-align: center;
         margin-top: 12px;
@@ -156,7 +160,6 @@
         background-color: var(--accent);
     }
 
-    /* FULLSCREEN SLUITKNOP */
     .fullscreen-close {
         position: fixed;
         top: 20px;
@@ -171,23 +174,12 @@
         display: none;
     }
 
-    /* --- RESPONSIVE NAVIGATIE --- */
+    /* RESPONSIVE */
     @media (max-width: 900px) {
-        .nav-header {
-            top: 10px;
-            right: 10px;
-            gap: 15px;
-        }
-        .nav-link {
-            padding: 8px 14px;
-            font-size: 14px;
-        }
-        .insta-icon img {
-            width: 32px;
-        }
-        .slideshow-container {
-            height: 450px;
-        }
+        .slideshow-container { height: 450px; }
+        .nav-header { top: 10px; right: 10px; gap: 15px; }
+        .nav-link { padding: 8px 14px; font-size: 14px; }
+        .insta-icon img { width: 32px; }
     }
 
     @media (max-width: 600px) {
@@ -202,29 +194,9 @@
             gap: 10px;
             z-index: 999;
         }
-        .nav-link {
-            padding: 6px 10px;
-            font-size: 13px;
-        }
-        .insta-icon img {
-            width: 28px;
-        }
-        .wrapper {
-            padding: 120px 15px 40px;
-        }
-        .slideshow-container {
-            height: 300px;
-        }
-        .prev, .next {
-            font-size: 18px;
-            padding: 10px;
-        }
-        .fullscreen-close {
-            top: 12px;
-            right: 12px;
-            font-size: 26px;
-            padding: 6px 10px;
-        }
+        .slideshow-container { height: 300px; }
+        .prev, .next { font-size: 18px; padding: 10px; }
+        .fullscreen-close { font-size: 26px; padding: 6px 10px; }
         h1 { font-size: 26px; }
         h2 { font-size: 20px; }
         p { font-size: 15px; }
@@ -237,7 +209,6 @@
 <header class="nav-header">
     <a href="index.html" class="nav-link">Home</a>
     <a href="projecten.html" class="nav-link">Projecten</a>
-
     <div class="nav-follow">
         <span>Volg ons op:</span>
         <a href="https://www.instagram.com/creatieftechniek" target="_blank" class="insta-icon">
@@ -251,37 +222,17 @@
 <h1>Maatwerk muilkorf voor Cane Corso</h1>
 
 <p>
-    Voor Orthopedieren ontwierp en produceerde ik een volledig <strong>3D‑geprinte muilkorf op maat</strong>.  
-    De muilkorf is specifiek afgestemd op de anatomie van een Cane Corso en ontworpen voor comfort, veiligheid en een nauwkeurige pasvorm.
-</p>
-
-<p>
-    De vorm en afmetingen zijn bepaald aan de hand van een <strong>schetstekening met exacte omvang- en lengtematen</strong>.  
-    Op basis daarvan heb ik een digitaal 3D‑model opgebouwd dat volledig aansluit op de kopvorm van de hond.
-</p>
-
-<p>
-    Voor de productie koos ik voor <strong>PETG‑materiaal</strong>, omdat dit sterk, duurzaam en licht flexibel is.  
-    Hierdoor blijft de muilkorf stevig in gebruik, maar toch comfortabel voor de hond.
-</p>
-
-<p>
-    De samenwerking met Orthopedieren maakte het mogelijk om technische kennis te combineren met medische expertise.  
-    Meer informatie over hun werk is te vinden op:  
-    <a href="https://orthopedieren.nl" target="_blank">orthopedieren.nl</a>.
+    Voor Orthopedieren ontwierp en produceerde ik een volledig <strong>3D‑geprinte muilkorf op maat</strong>.
 </p>
 
 <h2>Foto’s</h2>
 
-<!-- FULLSCREEN SLUITKNOP -->
 <div id="fsClose" class="fullscreen-close" onclick="closeFullscreen()">✕</div>
 
-<!-- SLIDESHOW -->
 <div class="slideshow-container" onclick="openFullscreen(this)">
-
-    <div class="slide"><img src="muilkorf1.jpg" alt="Muilkorf foto 1"></div>
-    <div class="slide"><img src="muilkorf2.jpg" alt="Muilkorf foto 2"></div>
-    <div class="slide"><img src="muilkorf3.jpg" alt="Muilkorf foto 3"></div>
+    <div class="slide"><img src="muikorf1.jpg"></div>
+    <div class="slide"><img src="muikorf2.jpg"></div>
+    <div class="slide"><img src="muikorf3.jpg"></div>
 
     <a class="prev" onclick="event.stopPropagation(); plusSlides(-1)">❮</a>
     <a class="next" onclick="event.stopPropagation(); plusSlides(1)">❯</a>
@@ -298,6 +249,7 @@
 <script>
 let slideIndex = 1;
 let autoPlay = true;
+
 showSlides(slideIndex);
 
 function plusSlides(n) {
@@ -311,20 +263,14 @@ function currentSlide(n) {
 }
 
 function showSlides(n) {
-    let i;
     let slides = document.getElementsByClassName("slide");
     let dots = document.getElementsByClassName("dot");
 
-    if (n > slides.length) { slideIndex = 1 }
-    if (n < 1) { slideIndex = slides.length }
+    if (n > slides.length) slideIndex = 1;
+    if (n < 1) slideIndex = slides.length;
 
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
+    for (let i = 0; i < slides.length; i++) slides[i].style.display = "none";
+    for (let i = 0; i < dots.length; i++) dots[i].className = dots[i].className.replace(" active", "");
 
     slides[slideIndex - 1].style.display = "block";
     dots[slideIndex - 1].className += " active";
@@ -337,24 +283,14 @@ setInterval(() => {
     }
 }, 4000);
 
-/* FULLSCREEN OPENEN */
 function openFullscreen(elem) {
-    const fsBtn = document.getElementById("fsClose");
-    fsBtn.style.display = "block";
-
-    if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-    }
+    document.getElementById("fsClose").style.display = "block";
+    if (elem.requestFullscreen) elem.requestFullscreen();
 }
 
-/* FULLSCREEN SLUITEN */
 function closeFullscreen() {
-    const fsBtn = document.getElementById("fsClose");
-    fsBtn.style.display = "none";
-
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    }
+    document.getElementById("fsClose").style.display = "none";
+    if (document.exitFullscreen) document.exitFullscreen();
 }
 
 document.addEventListener("fullscreenchange", () => {
