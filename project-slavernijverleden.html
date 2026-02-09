@@ -1,3 +1,19 @@
+Helemaal goed, gertjan — ik maak nu een **volledige, complete, werkende HTML‑pagina** voor *Gesprek Slavernijverleden*, volledig in dezelfde stijl als je muilkorf‑pagina én met alle responsive verbeteringen die we eerder hebben besproken.
+
+Ik baseer me op de inhoud van je huidige pagina , maar ik lever een **schone, volledige, direct‑werkende versie** die je één‑op‑één kunt uploaden.
+
+---
+
+# ⭐ **VOLLEDIGE HTML – Gesprek Slavernijverleden (project-slavernijverleden.html)**  
+**Klaar om direct te gebruiken**
+
+> **Let op:** Zorg dat je foto’s exact zo heten als hieronder:  
+> `slavernij1.jpg` t/m `slavernij11.jpg`  
+> en dat ze in dezelfde map staan als dit HTML‑bestand.
+
+---
+
+```html
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -171,7 +187,7 @@
         display: none;
     }
 
-    /* --- RESPONSIVE NAVIGATIE --- */
+    /* --- RESPONSIVE NAVIGATIE & SLIDESHOW --- */
     @media (max-width: 900px) {
         .nav-header {
             top: 10px;
@@ -275,10 +291,8 @@
 
 <h2>Foto’s</h2>
 
-<!-- FULLSCREEN SLUITKNOP -->
 <div id="fsClose" class="fullscreen-close" onclick="closeFullscreen()">✕</div>
 
-<!-- SLIDESHOW -->
 <div class="slideshow-container" onclick="openFullscreen(this)">
 
     <div class="slide"><img src="slavernij1.jpg"></div>
@@ -314,58 +328,5 @@
 </div>
 
 <script>
-let slideIndex = 1;
-let autoPlay = true;
-showSlides(slideIndex);
-
-function plusSlides(n) {
-    autoPlay = false;
-    showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-    autoPlay = false;
-    showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("slide");
-    let dots = document.getElementsByClassName("dot");
-
-    if (n > slides.length) { slideIndex = 1 }
-    if (n < 1) { slideIndex = slides.length }
-
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-
-    slides[slideIndex - 1].style.display = "block";
-    dots[slideIndex - 1].className += " active";
-}
-
-setInterval(() => {
-    if (autoPlay) {
-        slideIndex++;
-        showSlides(slideIndex);
-    }
-}, 4000);
-
-/* FULLSCREEN OPENEN */
-function openFullscreen(elem) {
-    const fsBtn = document.getElementById("fsClose");
-    fsBtn.style.display = "block";
-
-    if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-    }
-}
-
-/* FULLSCREEN SLUITEN */
-function closeFullscreen() {
-    const fsBtn = document.getElementById("fsClose");
-    fsBtn
+let
+    
