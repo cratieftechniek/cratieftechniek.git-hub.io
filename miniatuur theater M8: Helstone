@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miniatuur Theater M8: Helstone – Creatief Techniek</title>
+
+<style>
+    :root { --accent: #f5d08a; }
+
+    body {
+        margin: 0;
+        background: #000;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        position: relative;
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(circle at top left, rgba(255,200,120,0.18), transparent 70%);
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    .nav-header {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        z-index: 50;
+    }
+
+    .nav-link {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: bold;
+        background: rgba(0,0,0,0.6);
+        padding: 10px 18px;
+        border-radius: 8px;
+        border: 1px solid rgba(255,200,120,0.25);
+        transition: 0.2s;
+    }
+
+    .nav-link:hover {
+        background: rgba(255,200,120,0.15);
+    }
+
+    .nav-follow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--accent);
+        font-weight: bold;
+    }
+
+    .insta-icon img {
+        width: 45px;
+        opacity: 0.9;
+        transition: 0.2s;
+    }
+
+    .insta-icon img:hover {
+        opacity: 1;
+    }
+
+    .wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 140px 20px 40px;
+        position: relative;
+        z-index: 2;
+    }
+
+    h1, h2 {
+        color: var(--accent);
+    }
+
+    p { line-height: 1.6; }
+
+    /* SLIDESHOW */
+    .slideshow-container {
+        position: relative;
+        width: 100%;
+        height: 600px;
+        overflow: hidden;
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.2);
+        cursor: pointer;
+        margin-top: 40px;
+        background: #000;
+    }
+
+    .slide { display: none; width: 100%; height: 100%; }
+    .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: #000;
+    }
+
+    .prev, .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 16px;
+        background: rgba(0,0,0,0.4);
+        border-radius: 6px;
+        font-size: 26px;
+        color: var(--accent);
+        cursor: pointer;
+        user-select: none;
+        z-index: 10;
+    }
+
+    .prev:hover, .next:hover { background: rgba(255,200,120,0.2); }
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    .dots { text-align: center; margin-top: 12px; }
+    .dot {
+        cursor: pointer;
+        height: 12px;
+        width: 12px;
+        margin: 0 4px;
+        background-color: #444;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.3s;
+    }
+    .active, .dot:hover { background-color: var(--accent); }
+
+    .fullscreen-close {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        font-size: 32px;
+        color: var(--accent);
+        background: rgba(0,0,0,0.6);
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        z-index: 9999;
+        display: none;
+    }
+
+    @media (max-width: 900px) { .slideshow-container { height: 450px; } }
+    @media (max-width: 600px) {
+        .slideshow-container { height: 300px; }
+        .prev, .next { font-size: 18px; padding: 10px; }
+        .fullscreen-close { font-size: 26px; padding: 6px 10px; }
+    }
+</style>
+</head>
+
+<body>
+
+<header class="nav-header">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="projecten.html" class="nav-link">Projecten</a>
+    <div class="nav-follow">
+        <span>Volg ons op:</span>
+        <a href="https://www.instagram.com/creatieftechniek" target="_blank" class="insta-icon">
+            <img src="instagram.png" alt="Instagram">
+        </a>
+    </div>
+</header>
+
+<div class="wrapper">
+
+<h1>Miniatuur Theater – M8: Helstone</h1>
+
+<p>
+    Voor de installatie <strong>M8: Helstone</strong> werkte ik als technisch 3D bijdrager aan de realisatie van een volledig miniatuur‑theater.  
+    Dit werk werd onder andere gepresenteerd op <strong>Oerol</strong> en maakt deel uit van het onderzoek van theatermaker <strong>Mathieu Wijdeven</strong> naar de Surinaamse componist <strong>J.N. Helstone</strong>.
+</p>
+
+<h2>Mijn bijdrage</h2>
+<p>
+   Ik was verantwoordelijk voor een aantal cruciale onderdelen binnen de installatie:
+</p>
+
+<ul>
+    <li>Ik Ontwierp en produceerde <strong>3D‑geprinte stoeltjes</strong></li>
+    <li>Het creëren van een <strong>perspectief‑opbouw</strong> voor optische diepte</li>
+    <li>Technische montage, van de 3D stoeltjes en schaalverdelig </li>
+</ul>
+
+<p>
+    Door nauwkeurig 3D‑printwerk, slimme schaalverhoudingen en ambachtelijke afwerking ontstond een miniatuur‑theater dat zowel technisch verfijnd als artistiek overtuigend is.
+</p>
+
+<h2>Bouw & Installatie</h2>
+<p>De installatie werd gebouwd in samenwerking met:</p>
+
+<ul>
+    <li><strong>Pim Kraan</strong> – constructie & technische ondersteuning & detailafwerking</li>
+    <li><strong>Peter Leeuwenburgh</strong> – bouw, & installatiewerk</li>
+    <li><strong>“Gertjan Ruigrok”</strong> – 3D‑print, perspectiefopbouw & technische realisatie</li>
+</ul>
+
+<h2>Foto’s</h2>
+
+<div id="fsClose" class="fullscreen-close" onclick="closeFullscreen()">✕</div>
+
+<div class="slideshow-container" onclick="openFullscreen(this)">
+    <div class="slide"><img src="helstone1.jpg"></div>
+    <div class="slide"><img src="helstone2.jpg"></div>
+    <div class="slide"><img src="helstone3.jpg"></div>
+    <div class="slide"><img src="helstone4.jpg"></div>
+    <div class="slide"><img src="helstone5.jpg"></div>
+
+    <a class="prev" onclick="event.stopPropagation(); plusSlides(-1)">❮</a>
+    <a class="next" onclick="event.stopPropagation(); plusSlides(1)">❯</a>
+</div>
+
+<div class="dots">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    <span class="dot" onclick="currentSlide(5)"></span>
+</div>
+
+</div>
+
+<script>
+let slideIndex = 1;
+let autoPlay = true;
+
+showSlides(slideIndex);
+
+function plusSlides(n) {
+    autoPlay = false;
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    autoPlay = false;
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    let slides = document.getElementsByClassName("slide");
+    let dots = document.getElementsByClassName("dot");
+
+    if (n > slides.length) slideIndex = 1;
+    if (n < 1) slideIndex = slides.length;
+
+    for (let i = 0; i < slides.length; i++) slides[i].style.display = "none";
+    for (let i = 0; i < dots.length; i++) dots[i].className = dots[i].className.replace(" active", "");
+
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+}
+
+setInterval(() => {
+    if (autoPlay) {
+        slideIndex++;
+        showSlides(slideIndex);
+    }
+}, 4000);
+
+function openFullscreen(elem) {
+    document.getElementById("fsClose").style.display = "block";
+    if (elem.requestFullscreen) elem.requestFullscreen();
+}
+
+function closeFullscreen() {
+    document.getElementById("fsClose").style.display = "none";
+    if (document.exitFullscreen) document.exitFullscreen();
+}
+
+document.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement) {
+        document.getElementById("fsClose").style.display = "none";
+    }
+});
+</script>
+
+</body>
+</html>
