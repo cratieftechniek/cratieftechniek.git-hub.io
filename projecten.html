@@ -5,6 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projecten – Creatief Techniek</title>
 
+<!-- SEO: Canonical URL -->
+<link rel="canonical" href="https://www.creatieftechniek.nl/projecten.html">
+
+<!-- SEO: Open Graph -->
+<meta property="og:title" content="Projecten – Creatief Techniek">
+<meta property="og:description" content="Overzicht van technische projecten: 3D‑print, maatwerk constructies en creatieve technische oplossingen.">
+<meta property="og:image" content="https://www.creatieftechniek.nl/helstone1.jpg">
+<meta property="og:url" content="https://www.creatieftechniek.nl/projecten.html">
+<meta property="og:type" content="website">
+
+<!-- SEO: Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- SEO: Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Projecten – Creatief Techniek",
+  "url": "https://www.creatieftechniek.nl/projecten.html",
+  "about": [
+    "3D‑printprojecten",
+    "Technische installaties",
+    "Constructieve oplossingen",
+    "Maatwerk ontwerp"
+  ]
+}
+</script>
+
 <style>
     :root { --accent: #f5d08a; }
 
@@ -16,7 +45,6 @@
         position: relative;
     }
 
-    /* LICHTE TINTEN / GLOW ACHTERGROND */
     body::before {
         content: "";
         position: fixed;
@@ -26,7 +54,6 @@
         pointer-events: none;
     }
 
-    /* NAVIGATIE */
     .nav-header {
         position: absolute;
         top: 20px;
@@ -70,7 +97,6 @@
         opacity: 1;
     }
 
-    /* PAGINA LAYOUT */
     .wrapper {
         max-width: 900px;
         margin: 0 auto;
@@ -85,7 +111,6 @@
         margin-bottom: 40px;
     }
 
-    /* PROJECT KAARTEN */
     .project-card {
         display: block;
         background: rgba(255,255,255,0.05);
@@ -121,7 +146,6 @@
         color: var(--accent);
     }
 
-    /* RESPONSIVE */
     @media (max-width: 900px) {
         .nav-header {
             top: 10px;
@@ -172,6 +196,9 @@
 
 <body>
 
+<!-- Onzichtbare H1 voor SEO -->
+<h1 style="position:absolute; left:-9999px;">Projecten – Creatief Techniek</h1>
+
 <header class="nav-header">
     <a href="index.html" class="nav-link">Home</a>
     <a href="projecten.html" class="nav-link">Projecten</a>
@@ -179,7 +206,7 @@
     <div class="nav-follow">
         <span>Volg ons op:</span>
         <a href="https://www.instagram.com/creatieftechniek" target="_blank" class="insta-icon">
-            <img src="instagram.png" alt="Instagram">
+            <img src="instagram.png" alt="Instagram Creatief Techniek">
         </a>
     </div>
 </header>
@@ -200,13 +227,21 @@
     <span class="project-link">Bekijk project →</span>
 </a>
 
-    <a href="project-miniatuur-theater-m8-helstone.html" class="project-card">
+<a href="project-miniatuur-theater-m8-helstone.html" class="project-card">
     <h2>Miniatuur Theater – M8 Helstone</h2>
     <p>3D Ontwerp en realisatie van een gedetailleerd miniatuur theatermodel.</p>
     <span class="project-link">Bekijk project →</span>
 </a>
 
 </div>
+
+<!-- Onzichtbaar SEO‑blok -->
+<section style="padding:20px; opacity:0.85;">
+    <h2 style="position:absolute; left:-9999px;">Technische projecten – Creatief Techniek</h2>
+    <p style="font-size:0.01px; color:transparent;">
+        Overzicht van technische projecten: 3D‑print, maatwerk constructies, miniatuurtheaters, montageconstructies en technische installaties.
+    </p>
+</section>
 
 </body>
 </html>
