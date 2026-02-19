@@ -6,8 +6,18 @@
 
 <title>Creatief Techniek – Creatief technisch maatwerk</title>
 
-<!-- SEO -->
-<meta name="description" content="Creatief Techniek – Maatwerk in techniek, design en creatieve oplossingen. Van prototypes tot kunstobjecten, gebouwd door Gertjan Ruigrok.">
+<!-- SEO: Canonical URL -->
+<link rel="canonical" href="https://www.creatieftechniek.nl/index.html">
+
+<!-- SEO: Open Graph -->
+<meta property="og:title" content="Creatief Techniek – Creatief technisch maatwerk">
+<meta property="og:description" content="Creatief Techniek – Maatwerk in techniek, design en creatieve oplossingen. Van prototypes tot kunstobjecten, gebouwd door Gertjan Ruigrok.">
+<meta property="og:image" content="https://www.creatieftechniek.nl/achtergrond.jpg">
+<meta property="og:url" content="https://www.creatieftechniek.nl/index.html">
+<meta property="og:type" content="website">
+
+<!-- SEO: Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
 
 <!-- Structured Data -->
 <script type="application/ld+json">
@@ -16,7 +26,10 @@
   "@type": "Person",
   "name": "Gertjan Ruigrok",
   "jobTitle": "Creatief technisch maker",
-  "url": "https://www.creatieftechniek.nl"
+  "url": "https://www.creatieftechniek.nl",
+  "sameAs": [
+    "https://www.instagram.com/creatieftechniek"
+  ]
 }
 </script>
 
@@ -31,13 +44,11 @@
         overflow-x: hidden;
     }
 
-    /* HOOFD TITEL (SEO) */
     h1 {
         position: absolute;
-        left: -9999px; /* zichtbaar voor Google, niet voor bezoekers */
+        left: -9999px;
     }
 
-    /* NAVIGATIE */
     nav.nav-header {
         position: absolute;
         top: 20px;
@@ -84,7 +95,6 @@
         opacity: 1;
     }
 
-    /* HERO */
     .hero {
         position: relative;
         min-height: 100vh;
@@ -103,7 +113,6 @@
         background: radial-gradient(circle at top left, rgba(255,200,120,0.18), transparent);
     }
 
-    /* CONTENT BLOKKEN */
     .content {
         width: 380px;
         max-width: 100%;
@@ -146,7 +155,6 @@
         color: #82c3ff;
     }
 
-    /* TABLET */
     @media (max-width: 1024px) {
         .hero {
             justify-content: center;
@@ -175,7 +183,6 @@
         }
     }
 
-    /* MOBIEL */
     @media (max-width: 600px) {
         .hero {
             padding: 20px;
@@ -263,6 +270,14 @@
         </details>
 
     </div>
+</section>
+
+<!-- Onzichtbaar SEO‑blok -->
+<section style="padding:20px; opacity:0.85;">
+    <h2 style="position:absolute; left:-9999px;">Creatief Techniek – Technisch maatwerk en creatieve oplossingen</h2>
+    <p style="font-size:0.01px; color:transparent;">
+        Creatief Techniek levert maatwerk in techniek, 3D‑print, constructies, prototypes, kunstobjecten en creatieve technische oplossingen.
+    </p>
 </section>
 
 </body>
