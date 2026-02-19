@@ -1,140 +1,202 @@
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creatief Techniek – Creatief technisch maatwerk</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creatief Techniek – Creatief technisch maatwerk</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-image: url('achtergrond.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: #fff;
-        }
+<style>
+    :root { --accent: #f5d08a; }
 
-        header {
-            background: rgba(0,0,0,0.6);
-            padding: 20px;
-            text-align: center;
-        }
+    body {
+        margin: 0;
+        background: #000;
+        color: #fff;
+        font-family: Arial, sans-serif;
+    }
 
-        h1 {
-            margin: 0;
-            font-size: 2.2rem;
-        }
+    /* NAVIGATIE */
+    .nav-header {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        z-index: 50;
+    }
 
-        nav {
-            display: flex;
+    .nav-link {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: bold;
+        background: rgba(0,0,0,0.6);
+        padding: 10px 18px;
+        border-radius: 8px;
+        border: 1px solid rgba(255,200,120,0.25);
+        transition: 0.2s;
+    }
+
+    .nav-link:hover {
+        background: rgba(255,200,120,0.15);
+    }
+
+    .nav-follow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--accent);
+        font-weight: bold;
+    }
+
+    .insta-icon img {
+        width: 45px;
+        opacity: 0.9;
+        transition: 0.2s;
+    }
+
+    .insta-icon img:hover {
+        opacity: 1;
+    }
+
+    /* HERO */
+    .hero {
+        position: relative;
+        height: 100vh;
+        background: url('achtergrond.jpg') center/cover no-repeat;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        padding: 40px 120px 40px 40px;
+    }
+
+    .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top left, rgba(255,200,120,0.18), transparent);
+    }
+
+    /* CONTENT BLOKKEN */
+    .content {
+        width: 380px;
+        z-index: 20;
+        margin-bottom: 300px;
+    }
+
+    details {
+        background: rgba(0,0,0,0.55);
+        border: 1px solid rgba(255,200,120,0.25);
+        padding: 15px 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        backdrop-filter: blur(4px);
+    }
+
+    summary {
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: bold;
+        color: var(--accent);
+    }
+
+    /* VERWIJDER GELE ► MARKER */
+    summary::-webkit-details-marker { display: none; }
+    summary::marker { display: none; }
+
+    details p { 
+        margin-top: 15px; 
+        line-height: 1.6; 
+    }
+
+    /* E-MAIL STIJL */
+    .email-link {
+        color: #4da3ff;
+        font-weight: bold;
+        text-decoration: underline;
+        font-size: 18px;
+    }
+
+    .email-link:hover {
+        color: #82c3ff;
+    }
+
+    /* MOBIEL */
+    @media (max-width: 1024px) {
+        .hero {
             justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 8px 14px;
-            background: rgba(0,0,0,0.4);
-            border-radius: 6px;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 900px;
-            margin: 40px auto;
-            background: rgba(0,0,0,0.55);
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        details {
-            background: rgba(255,255,255,0.1);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        summary {
-            cursor: pointer;
-            font-size: 1.3rem;
-            font-weight: bold;
-        }
-
-        footer {
+            padding: 40px;
             text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            background: rgba(0,0,0,0.6);
         }
 
-        /* Mobiel */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.6rem;
-            }
-
-            nav {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .container {
-                padding: 15px;
-            }
+        .content {
+            width: 100%;
+            margin-bottom: 80px;
         }
-    </style>
+
+        .nav-link {
+            padding: 6px 12px;
+            font-size: 14px;
+        }
+
+        .insta-icon img {
+            width: 30px;
+        }
+    }
+</style>
 </head>
 
 <body>
 
-<header>
-    <h1>Creatief Techniek</h1>
-    <nav>
-        <a href="#wie">Wie ben ik</a>
-        <a href="#diensten">Diensten</a>
-        <a href="#contact">Contact</a>
-    </nav>
+<header class="nav-header">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="projecten.html" class="nav-link">Projecten</a>
+
+    <div class="nav-follow">
+        <span>Volg ons op:</span>
+        <a href="https://www.instagram.com/creatieftechniek" target="_blank" class="insta-icon">
+            <img src="instagram.png" alt="Instagram">
+        </a>
+    </div>
 </header>
 
-<div class="container">
+<section class="hero">
+    <div class="content">
 
-    <details id="wie">
-        <summary>Wie ben ik</summary>
-        <p>
-            Ik ben Gertjan en ik maak creatief technisch maatwerk.  
-            Van reparaties tot maatwerkoplossingen — ik denk graag met je mee.
-        </p>
-    </details>
+        <details>
+            <summary>Wie ben ik</summary>
+            <p>
+                Ik ben Gertjan Ruigrok — een maker met een sterke verbeeldingskracht en liefde voor vakmanschap.
+                Ik ontwerp en bouw maatwerk voor theater, podiumkunst, design en kunstobjecten —
+                van prototypes en mechanische oplossingen tot unieke vormen in hout en metaal.
+                Ik werk graag samen met makers en gezelschappen om ideeën tastbaar te maken.
+            </p>
+        </details>
 
-    <details id="diensten">
-        <summary>Diensten</summary>
-        <p>
-            • Technische oplossingen  
-            • Creatieve projecten  
-            • Reparaties  
-            • Maatwerk opdrachten  
-        </p>
-    </details>
+        <details>
+            <summary>Waarom met mij werken?</summary>
+            <p>
+                Ik denk mee, bouw mee en los problemen op met mijn handen.
+                Geen standaard oplossingen, maar maatwerk dat werkt — stevig, slim en betrouwbaar.
+                Ik combineer creativiteit met techniek, zodat ideeën niet alleen mooi zijn, maar ook functioneren.
+            </p>
+        </details>
 
-    <details id="contact">
-        <summary>Contact</summary>
-        <p>
-            Neem gerust contact op via e‑mail of telefoon.  
-            Ik help je graag verder.
-        </p>
-    </details>
+        <!-- CONTACT ALTIJD OPEN -->
+        <details open>
+            <summary>Contact</summary>
+            <p>
+                Voor vragen, opdrachten of samenwerkingen kun je altijd contact opnemen via Instagram of e‑mail:<br><br>
 
-</div>
+                <a href="mailto:creatieftechniek@hotmail.com" class="email-link">
+                    creatieftechniek@hotmail.com
+                </a>
+            </p>
+        </details>
 
-<footer>
-    © 2026 Creatief Techniek – Alle rechten voorbehouden
-</footer>
+    </div>
+</section>
 
 </body>
 </html>
