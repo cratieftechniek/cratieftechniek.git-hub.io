@@ -3,7 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Creatief Techniek – Creatief technisch maatwerk</title>
+
+<!-- SEO -->
+<meta name="description" content="Creatief Techniek – Maatwerk in techniek, design en creatieve oplossingen. Van prototypes tot kunstobjecten, gebouwd door Gertjan Ruigrok.">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Gertjan Ruigrok",
+  "jobTitle": "Creatief technisch maker",
+  "url": "https://www.creatieftechniek.nl"
+}
+</script>
 
 <style>
     :root { --accent: #f5d08a; }
@@ -16,8 +31,14 @@
         overflow-x: hidden;
     }
 
+    /* HOOFD TITEL (SEO) */
+    h1 {
+        position: absolute;
+        left: -9999px; /* zichtbaar voor Google, niet voor bezoekers */
+    }
+
     /* NAVIGATIE */
-    .nav-header {
+    nav.nav-header {
         position: absolute;
         top: 20px;
         right: 20px;
@@ -138,7 +159,7 @@
             margin-bottom: 120px;
         }
 
-        .nav-header {
+        nav.nav-header {
             right: 10px;
             top: 10px;
             gap: 10px;
@@ -167,7 +188,7 @@
             margin-bottom: 60px;
         }
 
-        .nav-header {
+        nav.nav-header {
             position: fixed;
             top: 10px;
             right: 10px;
@@ -194,17 +215,19 @@
 
 <body>
 
-<header class="nav-header">
+<h1>Creatief Techniek – Creatief technisch maatwerk</h1>
+
+<nav class="nav-header">
     <a href="index.html" class="nav-link">Home</a>
     <a href="projecten.html" class="nav-link">Projecten</a>
 
     <div class="nav-follow">
         <span>Volg ons op:</span>
         <a href="https://www.instagram.com/creatieftechniek" target="_blank" class="insta-icon">
-            <img src="instagram.png" alt="Instagram">
+            <img src="instagram.png" alt="Instagram Creatief Techniek">
         </a>
     </div>
-</header>
+</nav>
 
 <section class="hero">
     <div class="content">
