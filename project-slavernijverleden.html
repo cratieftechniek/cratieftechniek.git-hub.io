@@ -5,6 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gesprek Slavernijverleden – Creatief Techniek</title>
 
+<!-- SEO: Canonical URL -->
+<link rel="canonical" href="https://www.creatieftechniek.nl/project-slavernijverleden.html">
+
+<!-- SEO: Open Graph -->
+<meta property="og:title" content="Gesprek Slavernijverleden – Creatief Techniek">
+<meta property="og:description" content="Technische bijdrage aan het project Gesprek Slavernijverleden – 3D-modellen, montageconstructies en technische uitvoering.">
+<meta property="og:image" content="https://www.creatieftechniek.nl/slavernij1.jpg">
+<meta property="og:url" content="https://www.creatieftechniek.nl/project-slavernijverleden.html">
+<meta property="og:type" content="website">
+
+<!-- SEO: Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- SEO: Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Gesprek Slavernijverleden",
+  "creator": {
+    "@type": "Person",
+    "name": "Gertjan Ruigrok"
+  },
+  "url": "https://www.creatieftechniek.nl/project-slavernijverleden.html"
+}
+</script>
+
 <style>
     :root { --accent: #f5d08a; }
 
@@ -16,7 +43,6 @@
         position: relative;
     }
 
-    /* LICHTE TINTEN / GLOW ACHTERGROND */
     body::before {
         content: "";
         position: fixed;
@@ -26,7 +52,6 @@
         pointer-events: none;
     }
 
-    /* NAVIGATIE */
     .nav-header {
         position: absolute;
         top: 20px;
@@ -70,7 +95,6 @@
         opacity: 1;
     }
 
-    /* PAGINA LAYOUT */
     .wrapper {
         max-width: 900px;
         margin: 0 auto;
@@ -93,7 +117,6 @@
         line-height: 1.6;
     }
 
-    /* SLIDESHOW */
     .slideshow-container {
         position: relative;
         width: 100%;
@@ -174,7 +197,6 @@
         display: none;
     }
 
-    /* RESPONSIVE */
     @media (max-width: 900px) {
         .slideshow-container { height: 450px; }
         .nav-header { top: 10px; right: 10px; gap: 15px; }
@@ -206,13 +228,16 @@
 
 <body>
 
+<!-- Onzichtbare H1 voor SEO -->
+<h1 style="position:absolute; left:-9999px;">Gesprek Slavernijverleden</h1>
+
 <header class="nav-header">
     <a href="index.html" class="nav-link">Home</a>
     <a href="projecten.html" class="nav-link">Projecten</a>
     <div class="nav-follow">
         <span>Volg ons op:</span>
         <a href="https://www.instagram.com/creatieftechniek" target="_blank" class="insta-icon">
-            <img src="instagram.png" alt="Instagram">
+            <img src="instagram.png" alt="Instagram Creatief Techniek">
         </a>
     </div>
 </header>
@@ -250,17 +275,17 @@
 
 <div class="slideshow-container" onclick="openFullscreen(this)">
 
-    <div class="slide"><img src="slavernij1.jpg"></div>
-    <div class="slide"><img src="slavernij2.jpg"></div>
-    <div class="slide"><img src="slavernij3.jpg"></div>
-    <div class="slide"><img src="slavernij4.jpg"></div>
-    <div class="slide"><img src="slavernij5.jpg"></div>
-    <div class="slide"><img src="slavernij6.jpg"></div>
-    <div class="slide"><img src="slavernij7.jpg"></div>
-    <div class="slide"><img src="slavernij8.jpg"></div>
-    <div class="slide"><img src="slavernij9.jpg"></div>
-    <div class="slide"><img src="slavernij10.jpg"></div>
-    <div class="slide"><img src="slavernij11.jpg"></div>
+    <div class="slide"><img src="slavernij1.jpg" alt="Gesprek Slavernijverleden – technisch detail"></div>
+    <div class="slide"><img src="slavernij2.jpg" alt="Gesprek Slavernijverleden – 3D‑model aanpassing"></div>
+    <div class="slide"><img src="slavernij3.jpg" alt="Gesprek Slavernijverleden – montageconstructie"></div>
+    <div class="slide"><img src="slavernij4.jpg" alt="Gesprek Slavernijverleden – technische verbindingen"></div>
+    <div class="slide"><img src="slavernij5.jpg" alt="Gesprek Slavernijverleden – constructiedetail"></div>
+    <div class="slide"><img src="slavernij6.jpg" alt="Gesprek Slavernijverleden – technische uitvoering"></div>
+    <div class="slide"><img src="slavernij7.jpg" alt="Gesprek Slavernijverleden – montageproces"></div>
+    <div class="slide"><img src="slavernij8.jpg" alt="Gesprek Slavernijverleden – detailfoto"></div>
+    <div class="slide"><img src="slavernij9.jpg" alt="Gesprek Slavernijverleden – constructie op locatie"></div>
+    <div class="slide"><img src="slavernij10.jpg" alt="Gesprek Slavernijverleden – technische afwerking"></div>
+    <div class="slide"><img src="slavernij11.jpg" alt="Gesprek Slavernijverleden – eindresultaat installatie"></div>
 
     <a class="prev" onclick="event.stopPropagation(); plusSlides(-1)">❮</a>
     <a class="next" onclick="event.stopPropagation(); plusSlides(1)">❯</a>
@@ -335,6 +360,14 @@ document.addEventListener("fullscreenchange", () => {
     }
 });
 </script>
+
+<!-- Onzichtbaar SEO‑blok -->
+<section style="padding:20px; opacity:0.85;">
+    <h2 style="position:absolute; left:-9999px;">Technisch maatwerk – Gesprek Slavernijverleden</h2>
+    <p style="font-size:0.01px; color:transparent;">
+        Creatief Techniek levert technisch maatwerk voor installaties, 3D‑modellen, montageconstructies en constructieve oplossingen.
+    </p>
+</section>
 
 </body>
 </html>
