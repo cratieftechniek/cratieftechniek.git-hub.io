@@ -43,6 +43,9 @@
         color: #fff;
         font-family: Arial, sans-serif;
         overflow-x: hidden;
+
+        /* ⭐ NIEUW: ruimte voor sticky menu */
+        padding-top: 160px;
     }
 
     h1 {
@@ -50,14 +53,15 @@
         left: -9999px;
     }
 
+    /* ⭐ MENU NU STICKY */
     nav.nav-header {
-        position: absolute;
+        position: sticky;
         top: 20px;
         right: 20px;
         display: flex;
         align-items: center;
         gap: 25px;
-        z-index: 50;
+        z-index: 999;
         flex-wrap: wrap;
     }
 
@@ -205,6 +209,11 @@
             gap: 8px;
         }
 
+        /* ⭐ EXTRA RUIMTE VOOR MOBIEL MENU */
+        body {
+            padding-top: 120px;
+        }
+
         .nav-link {
             font-size: 13px;
             padding: 6px 10px;
@@ -232,12 +241,10 @@
     <div class="nav-follow">
         <span>Volg ons op:</span>
 
-        <!-- Instagram -->
         <a href="https://www.instagram.com/creatieftechniek" target="_blank" class="insta-icon">
             <img src="instagram.png" alt="Instagram Creatief Techniek">
         </a>
 
-        <!-- LinkedIn -->
         <a href="https://www.linkedin.com/company/111640182" target="_blank" class="insta-icon">
             <img src="linkedin.png" alt="LinkedIn Creatief Techniek">
         </a>
@@ -280,7 +287,6 @@
     </div>
 </section>
 
-<!-- Onzichtbaar SEO‑blok -->
 <section style="padding:20px; opacity:0.85;">
     <h2 style="position:absolute; left:-9999px;">Creatief Techniek – Technisch maatwerk en creatieve oplossingen</h2>
     <p style="font-size:0.01px; color:transparent;">
