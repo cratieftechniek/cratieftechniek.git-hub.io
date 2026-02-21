@@ -39,7 +39,7 @@
         color: #fff;
         font-family: Arial, sans-serif;
         overflow-x: hidden;
-        padding-top: 240px; /* ruimte voor quickbar + sticky menu */
+        padding-top: 240px;
     }
 
     h1 {
@@ -47,7 +47,7 @@
         left: -9999px;
     }
 
-    /* ⭐ QUICKBAR */
+    /* QUICKBAR */
     .quickbar {
         position: fixed;
         top: 10px;
@@ -102,57 +102,12 @@
         }
     }
 
-    /* ⭐ STICKY MENU – GECENTREERD + GEEN ZWARTE BALK */
-    nav.nav-header {
-        position: sticky;
-        top: 90px;
-        left: 0;
-        right: 0;
-        display: flex;
-        justify-content: center;   /* ⭐ centreren */
-        align-items: center;
-        gap: 25px;
-        z-index: 999;
-
-        /* ⭐ achtergrond zodat je geen zwarte balk ziet */
-        background: rgba(0,0,0,0.45);
-        backdrop-filter: blur(6px);
-        padding: 12px 0;
-        border-bottom: 1px solid rgba(255,200,120,0.25);
-    }
-
-    .nav-link {
-        color: var(--accent);
-        text-decoration: none;
-        font-weight: bold;
-        background: rgba(0,0,0,0.55);
-        padding: 16px 32px;
-        font-size: 18px;
-        border-radius: 12px;
-        border: 1px solid rgba(255,200,120,0.35);
-        transition: 0.2s;
-        white-space: nowrap;
-    }
-
-    /* ⭐ PROJECTEN EXTRA BELANGRIJK */
-    .nav-link[href="projecten.html"] {
-        background: rgba(255,200,120,0.18);
-        border-color: rgba(255,200,120,0.55);
-        box-shadow: 0 0 12px rgba(255,200,120,0.25);
-    }
-
-    .nav-link:hover {
-        background: rgba(255,200,120,0.25);
-    }
-
-    /* ⭐ GEEN OUDE ICONEN MEER */
-    /* nav-follow is volledig verwijderd */
-
+    /* HERO */
     .hero {
         position: relative;
         min-height: 100vh;
         background: url('achtergrond.jpg') center/cover no-repeat;
-        background-attachment: fixed; /* ⭐ achtergrond blijft vast */
+        background-attachment: fixed;
         display: flex;
         justify-content: flex-end;
         align-items: flex-end;
@@ -220,16 +175,6 @@
         .content {
             margin-bottom: 120px;
         }
-
-        nav.nav-header {
-            top: 100px;
-            gap: 10px;
-        }
-
-        .nav-link {
-            padding: 12px 24px;
-            font-size: 16px;
-        }
     }
 
     @media (max-width: 600px) {
@@ -244,22 +189,8 @@
             margin-bottom: 60px;
         }
 
-        nav.nav-header {
-            position: fixed;
-            top: 70px;
-            left: 10px;
-            right: 10px;
-            justify-content: center;
-            gap: 8px;
-        }
-
         body {
             padding-top: 200px;
-        }
-
-        .nav-link {
-            font-size: 14px;
-            padding: 10px 18px;
         }
     }
 </style>
@@ -267,7 +198,7 @@
 
 <body>
 
-<!-- ⭐ QUICKBAR -->
+<!-- QUICKBAR -->
 <div class="quickbar">
     <a href="index.html">
         <img src="home.png" alt="Home">
@@ -292,10 +223,7 @@
 
 <h1>Creatief Techniek – Creatief technisch maatwerk</h1>
 
-<nav class="nav-header">
-    <a href="index.html" class="nav-link">Home</a>
-    <a href="projecten.html" class="nav-link">Projecten</a>
-</nav>
+<!-- ⭐ OUDE MENU IS VERWIJDERD -->
 
 <section class="hero">
     <div class="content">
