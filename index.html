@@ -102,16 +102,23 @@
         }
     }
 
-    /* ⭐ STICKY MENU – GROTER & BREEDER */
+    /* ⭐ STICKY MENU – GECENTREERD + GEEN ZWARTE BALK */
     nav.nav-header {
         position: sticky;
         top: 90px;
-        right: 20px;
+        left: 0;
+        right: 0;
         display: flex;
+        justify-content: center;   /* ⭐ centreren */
         align-items: center;
         gap: 25px;
         z-index: 999;
-        flex-wrap: wrap;
+
+        /* ⭐ achtergrond zodat je geen zwarte balk ziet */
+        background: rgba(0,0,0,0.45);
+        backdrop-filter: blur(6px);
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255,200,120,0.25);
     }
 
     .nav-link {
@@ -138,7 +145,8 @@
         background: rgba(255,200,120,0.25);
     }
 
-    /* ⭐ OUD ICONENBLOK VERWIJDERD — GEEN nav-follow MEER */
+    /* ⭐ GEEN OUDE ICONEN MEER */
+    /* nav-follow is volledig verwijderd */
 
     .hero {
         position: relative;
@@ -214,7 +222,6 @@
         }
 
         nav.nav-header {
-            right: 10px;
             top: 100px;
             gap: 10px;
         }
@@ -240,8 +247,8 @@
         nav.nav-header {
             position: fixed;
             top: 70px;
-            right: 10px;
             left: 10px;
+            right: 10px;
             justify-content: center;
             gap: 8px;
         }
