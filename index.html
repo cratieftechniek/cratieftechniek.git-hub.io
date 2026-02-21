@@ -33,13 +33,15 @@
 <style>
     :root { --accent: #f5d08a; }
 
-    body {
+    /* ⭐ GEEN SCROLL MEER */
+    html, body {
         margin: 0;
+        padding: 0;
+        overflow: hidden; /* scroll UIT */
+        height: 100%;
         background: #000;
-        color: #fff;
         font-family: Arial, sans-serif;
-        overflow-x: hidden;
-        padding-top: 240px;
+        color: #fff;
     }
 
     h1 {
@@ -47,7 +49,7 @@
         left: -9999px;
     }
 
-    /* QUICKBAR */
+    /* ⭐ QUICKBAR */
     .quickbar {
         position: fixed;
         top: 10px;
@@ -86,32 +88,16 @@
         box-shadow: 0 0 12px rgba(255,200,120,0.6);
     }
 
-    @media (max-width: 600px) {
-        .quickbar {
-            gap: 14px;
-            padding: 10px 14px;
-        }
-
-        .quickbar img {
-            width: 32px;
-            height: 32px;
-        }
-
-        .quickbar span {
-            display: none;
-        }
-    }
-
-    /* HERO */
+    /* ⭐ HERO VOLLEDIG SCHERM */
     .hero {
         position: relative;
-        min-height: 100vh;
-        background: url('achtergrond.jpg') center/cover no-repeat;
-        background-attachment: fixed;
+        width: 100%;
+        height: 100vh; /* volledig scherm */
+        background: url('achtergrond.jpg') center/cover no-repeat fixed;
         display: flex;
         justify-content: flex-end;
-        align-items: flex-end;
-        padding: 40px 120px 40px 40px;
+        align-items: center;
+        padding-right: 80px;
         box-sizing: border-box;
     }
 
@@ -122,20 +108,20 @@
         background: radial-gradient(circle at top left, rgba(255,200,120,0.18), transparent);
     }
 
+    /* ⭐ CONTENT IN HET SCHERM */
     .content {
         width: 380px;
         max-width: 100%;
         z-index: 20;
-        margin-bottom: 300px;
+        background: rgba(0,0,0,0.55);
+        border: 1px solid rgba(255,200,120,0.25);
+        padding: 20px;
+        border-radius: 12px;
+        backdrop-filter: blur(4px);
     }
 
     details {
-        background: rgba(0,0,0,0.55);
-        border: 1px solid rgba(255,200,120,0.25);
-        padding: 15px 20px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        backdrop-filter: blur(4px);
+        margin-bottom: 15px;
     }
 
     summary {
@@ -145,12 +131,9 @@
         color: var(--accent);
     }
 
-    summary::-webkit-details-marker { display: none; }
-    summary::marker { display: none; }
-
-    details p { 
-        margin-top: 15px; 
-        line-height: 1.6; 
+    details p {
+        margin-top: 10px;
+        line-height: 1.6;
     }
 
     .email-link {
@@ -160,45 +143,19 @@
         font-size: 18px;
     }
 
-    .email-link:hover {
-        color: #82c3ff;
+    /* ⭐ SEO TEKST ONZICHTBAAR */
+    .seo {
+        position: absolute;
+        left: -9999px;
+        opacity: 0;
     }
 
-    @media (max-width: 1024px) {
-        .hero {
-            justify-content: center;
-            align-items: flex-end;
-            padding: 40px;
-            text-align: center;
-        }
-
-        .content {
-            margin-bottom: 120px;
-        }
-    }
-
-    @media (max-width: 600px) {
-        .hero {
-            padding: 20px;
-            justify-content: center;
-            align-items: flex-end;
-        }
-
-        .content {
-            width: 100%;
-            margin-bottom: 60px;
-        }
-
-        body {
-            padding-top: 200px;
-        }
-    }
 </style>
 </head>
 
 <body>
 
-<!-- QUICKBAR -->
+<!-- ⭐ QUICKBAR -->
 <div class="quickbar">
     <a href="index.html">
         <img src="home.png" alt="Home">
@@ -223,7 +180,7 @@
 
 <h1>Creatief Techniek – Creatief technisch maatwerk</h1>
 
-<!-- ⭐ OUDE MENU IS VERWIJDERD -->
+<!-- ⭐ GEEN MENU MEER -->
 
 <section class="hero">
     <div class="content">
@@ -261,12 +218,10 @@
     </div>
 </section>
 
-<section style="padding:20px; opacity:0.85;">
-    <h2 style="position:absolute; left:-9999px;">Creatief Techniek – Technisch maatwerk en creatieve oplossingen</h2>
-    <p style="font-size:0.01px; color:transparent;">
-        Creatief Techniek levert maatwerk in techniek, 3D‑print, constructies, prototypes, kunstobjecten en creatieve technische oplossingen.
-    </p>
-</section>
+<!-- ⭐ SEO TEKST (onzichtbaar maar aanwezig) -->
+<div class="seo">
+    Creatief Techniek levert maatwerk in techniek, 3D‑print, constructies, prototypes, kunstobjecten en creatieve technische oplossingen.
+</div>
 
 </body>
 </html>
