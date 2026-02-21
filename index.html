@@ -64,18 +64,18 @@
         box-shadow: 0 0 12px rgba(255,200,120,0.6);
     }
 
-    /* HERO */
+    /* HERO – DESKTOP RECHTS */
     .hero {
         position: relative;
         width: 100%;
         height: 100vh;
         background: url('achtergrond.jpg') center/cover no-repeat fixed;
         display: flex;
-        justify-content: center;
+        justify-content: flex-end; /* BLOK NAAR RECHTS */
         align-items: center;
-        padding: 20px;
+        padding-right: 80px; /* AFSTAND VAN RECHTERKANT */
         box-sizing: border-box;
-        text-align: center;
+        text-align: left;
     }
 
     .hero::before {
@@ -120,7 +120,7 @@
         font-size: 18px;
     }
 
-    /* MOBIEL OPTIMALISATIE */
+    /* MOBIEL – BLOK IN HET MIDDEN */
     @media (max-width: 600px) {
 
         body {
@@ -139,6 +139,13 @@
 
         .quickbar span {
             font-size: 11px;
+        }
+
+        .hero {
+            justify-content: center; /* MIDDEN */
+            align-items: center;
+            padding: 20px;
+            text-align: center;
         }
 
         .content {
