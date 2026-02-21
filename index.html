@@ -6,20 +6,16 @@
 
 <title>Creatief Techniek – Creatief technisch maatwerk</title>
 
-<!-- SEO: Canonical URL -->
 <link rel="canonical" href="https://www.creatieftechniek.nl/index.html">
 
-<!-- SEO: Open Graph -->
 <meta property="og:title" content="Creatief Techniek – Creatief technisch maatwerk">
 <meta property="og:description" content="Creatief Techniek – Maatwerk in techniek, design en creatieve oplossingen. Van prototypes tot kunstobjecten, gebouwd door Gertjan Ruigrok.">
 <meta property="og:image" content="https://www.creatieftechniek.nl/achtergrond.jpg">
 <meta property="og:url" content="https://www.creatieftechniek.nl/index.html">
 <meta property="og:type" content="website">
 
-<!-- SEO: Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 
-<!-- Structured Data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -43,9 +39,7 @@
         color: #fff;
         font-family: Arial, sans-serif;
         overflow-x: hidden;
-
-        /* ⭐ NIEUW: ruimte voor sticky menu */
-        padding-top: 160px;
+        padding-top: 240px; /* ruimte voor quickbar + sticky menu */
     }
 
     h1 {
@@ -53,10 +47,65 @@
         left: -9999px;
     }
 
-    /* ⭐ MENU NU STICKY */
+    /* ⭐ QUICKBAR */
+    .quickbar {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 28px;
+        padding: 14px 26px;
+        background: rgba(0,0,0,0.55);
+        border: 1px solid rgba(255,200,120,0.25);
+        border-radius: 16px;
+        backdrop-filter: blur(6px);
+        z-index: 1200;
+    }
+
+    .quickbar a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: var(--accent);
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .quickbar img {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        opacity: 0.9;
+        transition: 0.2s;
+    }
+
+    .quickbar img:hover {
+        opacity: 1;
+        box-shadow: 0 0 12px rgba(255,200,120,0.6);
+    }
+
+    @media (max-width: 600px) {
+        .quickbar {
+            gap: 14px;
+            padding: 10px 14px;
+        }
+
+        .quickbar img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .quickbar span {
+            display: none;
+        }
+    }
+
+    /* ⭐ STICKY MENU – GROTER & BREEDER */
     nav.nav-header {
         position: sticky;
-        top: 20px;
+        top: 90px;
         right: 20px;
         display: flex;
         align-items: center;
@@ -69,41 +118,33 @@
         color: var(--accent);
         text-decoration: none;
         font-weight: bold;
-        background: rgba(0,0,0,0.6);
-        padding: 10px 18px;
-        border-radius: 8px;
-        border: 1px solid rgba(255,200,120,0.25);
+        background: rgba(0,0,0,0.55);
+        padding: 16px 32px;
+        font-size: 18px;
+        border-radius: 12px;
+        border: 1px solid rgba(255,200,120,0.35);
         transition: 0.2s;
         white-space: nowrap;
     }
 
+    /* ⭐ PROJECTEN EXTRA BELANGRIJK */
+    .nav-link[href="projecten.html"] {
+        background: rgba(255,200,120,0.18);
+        border-color: rgba(255,200,120,0.55);
+        box-shadow: 0 0 12px rgba(255,200,120,0.25);
+    }
+
     .nav-link:hover {
-        background: rgba(255,200,120,0.15);
+        background: rgba(255,200,120,0.25);
     }
 
-    .nav-follow {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: var(--accent);
-        font-weight: bold;
-        flex-wrap: nowrap;
-    }
-
-    .insta-icon img {
-        width: 55px;
-        opacity: 0.9;
-        transition: 0.2s;
-    }
-
-    .insta-icon img:hover {
-        opacity: 1;
-    }
+    /* ⭐ OUD ICONENBLOK VERWIJDERD — GEEN nav-follow MEER */
 
     .hero {
         position: relative;
         min-height: 100vh;
         background: url('achtergrond.jpg') center/cover no-repeat;
+        background-attachment: fixed; /* ⭐ achtergrond blijft vast */
         display: flex;
         justify-content: flex-end;
         align-items: flex-end;
@@ -174,17 +215,13 @@
 
         nav.nav-header {
             right: 10px;
-            top: 10px;
+            top: 100px;
             gap: 10px;
         }
 
         .nav-link {
-            padding: 6px 12px;
-            font-size: 14px;
-        }
-
-        .insta-icon img {
-            width: 32px;
+            padding: 12px 24px;
+            font-size: 16px;
         }
     }
 
@@ -202,29 +239,20 @@
 
         nav.nav-header {
             position: fixed;
-            top: 10px;
+            top: 70px;
             right: 10px;
             left: 10px;
             justify-content: center;
             gap: 8px;
         }
 
-        /* ⭐ EXTRA RUIMTE VOOR MOBIEL MENU */
         body {
-            padding-top: 120px;
+            padding-top: 200px;
         }
 
         .nav-link {
-            font-size: 13px;
-            padding: 6px 10px;
-        }
-
-        .nav-follow span {
-            display: none;
-        }
-
-        .insta-icon img {
-            width: 28px;
+            font-size: 14px;
+            padding: 10px 18px;
         }
     }
 </style>
@@ -232,23 +260,34 @@
 
 <body>
 
+<!-- ⭐ QUICKBAR -->
+<div class="quickbar">
+    <a href="index.html">
+        <img src="home.png" alt="Home">
+        <span>Home</span>
+    </a>
+
+    <a href="projecten.html">
+        <img src="projecten.png" alt="Projecten">
+        <span>Projecten</span>
+    </a>
+
+    <a href="https://www.instagram.com/creatieftechniek" target="_blank">
+        <img src="instagram.png" alt="Instagram">
+        <span>Instagram</span>
+    </a>
+
+    <a href="https://www.linkedin.com/company/111640182" target="_blank">
+        <img src="linkedin.png" alt="LinkedIn">
+        <span>LinkedIn</span>
+    </a>
+</div>
+
 <h1>Creatief Techniek – Creatief technisch maatwerk</h1>
 
 <nav class="nav-header">
     <a href="index.html" class="nav-link">Home</a>
     <a href="projecten.html" class="nav-link">Projecten</a>
-
-    <div class="nav-follow">
-        <span>Volg ons op:</span>
-
-        <a href="https://www.instagram.com/creatieftechniek" target="_blank" class="insta-icon">
-            <img src="instagram.png" alt="Instagram Creatief Techniek">
-        </a>
-
-        <a href="https://www.linkedin.com/company/111640182" target="_blank" class="insta-icon">
-            <img src="linkedin.png" alt="LinkedIn Creatief Techniek">
-        </a>
-    </div>
 </nav>
 
 <section class="hero">
