@@ -6,38 +6,14 @@
 
 <title>Creatief Techniek – Creatief technisch maatwerk</title>
 
-<link rel="canonical" href="https://www.creatieftechniek.nl/index.html">
-
-<meta property="og:title" content="Creatief Techniek – Creatief technisch maatwerk">
-<meta property="og:description" content="Creatief Techniek – Maatwerk in techniek, design en creatieve oplossingen. Van prototypes tot kunstobjecten, gebouwd door Gertjan Ruigrok.">
-<meta property="og:image" content="https://www.creatieftechniek.nl/achtergrond.jpg">
-<meta property="og:url" content="https://www.creatieftechniek.nl/index.html">
-<meta property="og:type" content="website">
-
-<meta name="twitter:card" content="summary_large_image">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Gertjan Ruigrok",
-  "jobTitle": "Creatief technisch maker",
-  "url": "https://www.creatieftechniek.nl",
-  "sameAs": [
-    "https://www.instagram.com/creatieftechniek",
-    "https://www.linkedin.com/company/111640182"
-  ]
-}
-</script>
-
 <style>
     :root { --accent: #f5d08a; }
 
-    /* ⭐ GEEN SCROLL MEER */
+    /* GEEN SCROLL */
     html, body {
         margin: 0;
         padding: 0;
-        overflow: hidden; /* scroll UIT */
+        overflow: hidden;
         height: 100%;
         background: #000;
         font-family: Arial, sans-serif;
@@ -49,7 +25,7 @@
         left: -9999px;
     }
 
-    /* ⭐ QUICKBAR */
+    /* QUICKBAR */
     .quickbar {
         position: fixed;
         top: 10px;
@@ -88,17 +64,18 @@
         box-shadow: 0 0 12px rgba(255,200,120,0.6);
     }
 
-    /* ⭐ HERO VOLLEDIG SCHERM */
+    /* HERO */
     .hero {
         position: relative;
         width: 100%;
-        height: 100vh; /* volledig scherm */
+        height: 100vh;
         background: url('achtergrond.jpg') center/cover no-repeat fixed;
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
         align-items: center;
-        padding-right: 80px;
+        padding: 20px;
         box-sizing: border-box;
+        text-align: center;
     }
 
     .hero::before {
@@ -108,10 +85,10 @@
         background: radial-gradient(circle at top left, rgba(255,200,120,0.18), transparent);
     }
 
-    /* ⭐ CONTENT IN HET SCHERM */
+    /* CONTENT BLOK */
     .content {
         width: 380px;
-        max-width: 100%;
+        max-width: 90%;
         z-index: 20;
         background: rgba(0,0,0,0.55);
         border: 1px solid rgba(255,200,120,0.25);
@@ -143,11 +120,44 @@
         font-size: 18px;
     }
 
-    /* ⭐ SEO TEKST ONZICHTBAAR */
-    .seo {
-        position: absolute;
-        left: -9999px;
-        opacity: 0;
+    /* MOBIEL OPTIMALISATIE */
+    @media (max-width: 600px) {
+
+        body {
+            overflow: hidden;
+        }
+
+        .quickbar {
+            gap: 10px;
+            padding: 8px 12px;
+        }
+
+        .quickbar img {
+            width: 34px;
+            height: 34px;
+        }
+
+        .quickbar span {
+            font-size: 11px;
+        }
+
+        .content {
+            width: 100%;
+            max-width: 300px;
+            padding: 16px;
+        }
+
+        summary {
+            font-size: 18px;
+        }
+
+        details p {
+            font-size: 15px;
+        }
+
+        .email-link {
+            font-size: 16px;
+        }
     }
 
 </style>
@@ -155,7 +165,7 @@
 
 <body>
 
-<!-- ⭐ QUICKBAR -->
+<!-- QUICKBAR -->
 <div class="quickbar">
     <a href="index.html">
         <img src="home.png" alt="Home">
@@ -180,8 +190,6 @@
 
 <h1>Creatief Techniek – Creatief technisch maatwerk</h1>
 
-<!-- ⭐ GEEN MENU MEER -->
-
 <section class="hero">
     <div class="content">
 
@@ -191,7 +199,6 @@
                 Ik ben Gertjan Ruigrok — een maker met een sterke verbeeldingskracht en liefde voor vakmanschap.
                 Ik ontwerp en bouw maatwerk voor theater, podiumkunst, design en kunstobjecten —
                 van prototypes en mechanische oplossingen tot unieke vormen in hout en metaal.
-                Ik werk graag samen met makers en gezelschappen om ideeën tastbaar te maken.
             </p>
         </details>
 
@@ -200,7 +207,6 @@
             <p>
                 Ik denk mee, bouw mee en los problemen op met mijn handen.
                 Geen standaard oplossingen, maar maatwerk dat werkt — stevig, slim en betrouwbaar.
-                Ik combineer creativiteit met techniek, zodat ideeën niet alleen mooi zijn, maar ook functioneren.
             </p>
         </details>
 
@@ -217,11 +223,6 @@
 
     </div>
 </section>
-
-<!-- ⭐ SEO TEKST (onzichtbaar maar aanwezig) -->
-<div class="seo">
-    Creatief Techniek levert maatwerk in techniek, 3D‑print, constructies, prototypes, kunstobjecten en creatieve technische oplossingen.
-</div>
 
 </body>
 </html>
