@@ -54,7 +54,7 @@
         pointer-events: none;
     }
 
-    /* QUICKBAR */
+    /* QUICKBAR (CSS blijft staan!) */
     .quickbar {
         position: fixed;
         top: 10px;
@@ -96,7 +96,7 @@
     .wrapper {
         max-width: 900px;
         margin: 0 auto;
-        padding: 160px 20px 40px; /* ruimte voor quickbar */
+        padding: 160px 20px 40px;
         position: relative;
         z-index: 2;
     }
@@ -170,28 +170,16 @@
 
 <body>
 
-<!-- QUICKBAR -->
-<div class="quickbar">
-    <a href="index.html">
-        <img src="home.png" alt="Home">
-        <span>Home</span>
-    </a>
+<!-- QUICKBAR WORDT AUTOMATISCH INGEVOEGD -->
+<div id="quickbar-container"></div>
 
-    <a href="projecten.html">
-        <img src="projecten.png" alt="Projecten">
-        <span>Projecten</span>
-    </a>
-
-    <a href="https://www.instagram.com/creatieftechniek" target="_blank">
-        <img src="instagram.png" alt="Instagram">
-        <span>Instagram</span>
-    </a>
-
-    <a href="https://www.linkedin.com/company/111640182" target="_blank">
-        <img src="linkedin.png" alt="LinkedIn">
-        <span>LinkedIn</span>
-    </a>
-</div>
+<script>
+    fetch("quickbar.html")
+        .then(r => r.text())
+        .then(html => {
+            document.getElementById("quickbar-container").innerHTML = html;
+        });
+</script>
 
 <!-- Onzichtbare H1 voor SEO -->
 <h1 style="position:absolute; left:-9999px;">Projecten – Creatief Techniek</h1>
