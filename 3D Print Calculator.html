@@ -2,9 +2,10 @@
 <html lang="nl">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0""")/>>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>3D Print Calculator | Creatief Techniek</title>
 
+<!-- THREE.js -->
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
@@ -19,13 +20,46 @@
     --success:#28a745;
 }
 
+/* Achtergrond + ruimte voor quickbar */
 body{
     margin:0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family:'Segoe UI',sans-serif;
     background:var(--light);
-    color:#222;
+    padding-top:90px;
 }
 
+/* QUICKBAR */
+.quickbar{
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    background:#ffffff;
+    border-bottom:1px solid #ddd;
+    padding:10px 0;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:9999;
+}
+
+.quickbar a{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-decoration:none;
+    color:#333;
+    font-size:0.8rem;
+}
+
+.quickbar img{
+    width:50px;
+    height:50px;
+    object-fit:contain;
+    margin-bottom:5px;
+}
+
+/* HEADER */
 header{
     background:var(--primary);
     color:white;
@@ -36,6 +70,7 @@ header{
     letter-spacing:1px;
 }
 
+/* LAYOUT */
 .container{
     max-width:1100px;
     margin:auto;
@@ -81,12 +116,7 @@ input,select{
     font-size:0.95rem;
 }
 
-input:focus,select:focus{
-    outline:none;
-    border-color:var(--accent);
-}
-
-button, .btn{
+button,.btn{
     margin-top:1.5rem;
     display:block;
     width:100%;
@@ -98,7 +128,7 @@ button, .btn{
     font-size:1rem;
     font-weight:600;
     cursor:pointer;
-    transition:all 0.3s ease;
+    transition:0.3s;
     text-align:center;
     text-decoration:none;
 }
@@ -141,10 +171,6 @@ button:hover,.btn:hover{
     border:1px solid #ddd;
 }
 
-small{
-    color:var(--gray);
-}
-
 footer{
     text-align:center;
     padding:2rem 1rem;
@@ -155,6 +181,34 @@ footer{
 </head>
 <body>
 
+<!-- QUICKBAR -->
+<div class="quickbar">
+    <a href="index.html">
+        <img src="home.png" alt="Home">
+        <span>Home</span>
+    </a>
+
+    <a href="projecten.html">
+        <img src="projecten.png" alt="Projecten">
+        <span>Projecten</span>
+    </a>
+
+    <a href="3D Print Calculator.html">
+        <img src="3D.png" alt="3D Calculator">
+        <span>3D Calculator</span>
+    </a>
+
+    <a href="https://www.instagram.com/creatieftechniek" target="_blank">
+        <img src="instagram.png" alt="Instagram">
+        <span>Instagram</span>
+    </a>
+
+    <a href="https://www.linkedin.com/company/111640182" target="_blank">
+        <img src="linkedin.png" alt="LinkedIn">
+        <span>LinkedIn</span>
+    </a>
+</div>
+
 <header>
 3D Print Calculator – Creatief Techniek
 </header>
@@ -162,6 +216,7 @@ footer{
 <div class="container">
 <div class="grid">
 
+<!-- LINKERKOLOM -->
 <div class="card">
 <h2>Offerte Instellingen</h2>
 
@@ -175,27 +230,22 @@ footer{
 
 <label>Kleur</label>
 <select id="color">
-    <!-- Alleen de keuze Zwart -->
     <option value="Zwart">Zwart</option>
 </select>
 
 <label>Aantal</label>
-<input id="quantity" type="number" min="1" value="1""")/>>
+<input id="quantity" type="number" min="1" value="1">
 
 <div class="price-box">
 <div id="output">Upload een STL om de prijs te berekenen.</div>
 </div>
 
-<a id="emailButton" class="btn" href="#" target="_top">
-Vraag Offerte Aan
-</a>
+<a id="emailButton" class="btn" href="#" target="_top">Vraag Offerte Aan</a>
 
-<small>
-Let op: Voeg het STL-bestand handmatig toe aan de e-mail.
-</small>
-
+<small>Let op: Voeg het STL-bestand handmatig toe aan de e-mail.</small>
 </div>
 
+<!-- RECHTERKOLOM -->
 <div class="card">
 <h2>3D Model Viewer</h2>
 <div id="viewer-container"></div>
@@ -209,28 +259,27 @@ Let op: Voeg het STL-bestand handmatig toe aan de e-mail.
 </footer>
 
 <script>
-// ------- Calculator Logica -------
+/* --- KLEUREN --- */
+const colorMap={"Zwart":0x333333};
 
-const colorMap = {
-    "Zwart": 0x333333
+/* --- PRIJSINSTELLINGEN --- */
+const startPrice=5.00;
+const materialPricing={
+    PLA:{pricePerCM3:0.09},
+    PETG:{pricePerCM3:0.12},
+    TPU:{pricePerCM3:0.18}
 };
 
-const startPrice = 5.00;
+/* --- ELEMENTEN --- */
+const fileInput=document.getElementById("fileInput");
+const materialSelect=document.getElementById("material");
+const colorSelect=document.getElementById("color");
+const qtyInput=document.getElementById("quantity");
+const outputDiv=document.getElementById("output");
+const emailButton=document.getElementById("emailButton");
+const fileNameDiv=document.getElementById("fileName");
 
-const materialPricing = {
-    PLA:{pricePerCM3:0.06},
-    PETG:{pricePerCM3:0.08},
-    TPU:{pricePerCM3:0.12}
-};
-
-const fileInput = document.getElementById("fileInput");
-const materialSelect = document.getElementById("material");
-const colorSelect = document.getElementById("color");
-const qtyInput = document.getElementById("quantity");
-const outputDiv = document.getElementById("output");
-const emailButton = document.getElementById("emailButton");
-const fileNameDiv = document.getElementById("fileName");
-
+/* --- MATERIALEN LADEN --- */
 for(let m in materialPricing){
     let o=document.createElement("option");
     o.value=m;
@@ -240,16 +289,21 @@ for(let m in materialPricing){
 
 let currentVolume=null;
 
+/* --- BESTAND UPLOAD --- */
 fileInput.addEventListener("change",async(e)=>{
     const file=e.target.files[0];
     if(!file)return;
+
     fileNameDiv.textContent="Bestand: "+file.name;
+
     const buffer=await file.arrayBuffer();
     currentVolume=parseSTL(buffer);
+
     loadSTLIntoViewer(buffer,colorSelect.value);
     updatePrice();
 });
 
+/* --- EVENTS --- */
 qtyInput.addEventListener("input",updatePrice);
 materialSelect.addEventListener("change",updatePrice);
 colorSelect.addEventListener("change",()=>{
@@ -257,6 +311,7 @@ colorSelect.addEventListener("change",()=>{
     updatePrice();
 });
 
+/* --- PRIJSBEREKENING --- */
 function updatePrice(){
     if(!currentVolume){
         outputDiv.innerHTML="Upload een STL om prijs te berekenen.";
@@ -267,7 +322,8 @@ function updatePrice(){
     const mat=materialSelect.value;
     const clr=colorSelect.value;
     const qty=parseInt(qtyInput.value)||1;
-    const base= startPrice + cm3*materialPricing[mat].pricePerCM3;
+
+    const base=startPrice + cm3*materialPricing[mat].pricePerCM3;
     const total=base*qty;
 
     let discount=0;
@@ -288,12 +344,19 @@ function updatePrice(){
 
     outputDiv.innerHTML=html;
 
-    // Email link inclusief Materiaal en Kleur
-    emailButton.href=`mailto:creatietechniek@://hotmail.com 3D Print&body=Beste Creatief Techniek,%0D%0A%0D%0AIk ontvang graag een offerte voor het volgende model:%0D%0A- Materiaal: ${mat}%0D%0A- Kleur: ${clr}%0D%0A- Aantal: ${qty}%0D%0A- Volume: ${cm3.toFixed(2)} cm3%0D%0A- Prijsindicatie: €${final.toFixed(2)}%0D%0A%0D%0A(Vergeet niet het STL bestand bij te voegen aan de e-mail.)`;
+    emailButton.href=
+        `mailto:creatieftechniek@hotmail.com?subject=Offerte 3D Print`+
+        `&body=Beste,%0D%0A%0D%0A`+
+        `Graag ontvang ik een offerte voor:%0D%0A`+
+        `- Materiaal: ${mat}%0D%0A`+
+        `- Kleur: ${clr}%0D%0A`+
+        `- Aantal: ${qty}%0D%0A`+
+        `- Volume: ${cm3.toFixed(2)} cm³%0D%0A`+
+        `- Prijsindicatie: €${final.toFixed(2)}%0D%0A%0D%0A`+
+        `STL-bestand wordt handmatig toegevoegd.`;
 }
 
-// ------- STL Parser -------
-
+/* --- STL PARSER --- */
 function parseSTL(buffer){
     const view=new DataView(buffer);
     const triCount=view.getUint32(80,true);
@@ -323,8 +386,7 @@ function parseSTL(buffer){
     return Math.abs(volume);
 }
 
-// ------- 3D Viewer -------
-
+/* --- 3D VIEWER --- */
 let scene=new THREE.Scene();
 scene.background=new THREE.Color(0xffffff);
 
@@ -349,21 +411,21 @@ let mesh;
 function loadSTLIntoViewer(buffer,colorName){
     const loader=new THREE.STLLoader();
     const geometry=loader.parse(buffer);
-    
-    // Model Centreren
-    geometry.center(); 
-    
+
+    geometry.center();
+
     if(mesh)scene.remove(mesh);
+
     mesh=new THREE.Mesh(
         geometry,
         new THREE.MeshPhongMaterial({color:colorMap[colorName]})
     );
+
     scene.add(mesh);
 
-    // Zoom camera automatisch naar het model
     geometry.computeBoundingSphere();
-    const radius = geometry.boundingSphere.radius;
-    camera.position.set(radius * 2, radius * 2, radius * 2);
+    const radius=geometry.boundingSphere.radius;
+    camera.position.set(radius*2,radius*2,radius*2);
 }
 
 function updateViewerColor(colorName){
