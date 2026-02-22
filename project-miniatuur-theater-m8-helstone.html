@@ -52,61 +52,54 @@
         pointer-events: none;
     }
 
-    .nav-header {
-        position: absolute;
-        top: 20px;
-        right: 20px;
+    /* QUICKBAR (CSS blijft staan) */
+    .quickbar {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
         display: flex;
-        align-items: center;
-        gap: 25px;
-        z-index: 50;
-    }
-
-    .nav-link {
-        color: var(--accent);
-        text-decoration: none;
-        font-weight: bold;
-        background: rgba(0,0,0,0.6);
-        padding: 10px 18px;
-        border-radius: 8px;
+        gap: 28px;
+        padding: 14px 26px;
+        background: rgba(0,0,0,0.55);
         border: 1px solid rgba(255,200,120,0.25);
-        transition: 0.2s;
+        border-radius: 16px;
+        backdrop-filter: blur(6px);
+        z-index: 1200;
     }
 
-    .nav-link:hover {
-        background: rgba(255,200,120,0.15);
-    }
-
-    .nav-follow {
+    .quickbar a {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: 10px;
+        text-decoration: none;
         color: var(--accent);
+        font-size: 15px;
         font-weight: bold;
     }
 
-    .insta-icon img {
-        width: 45px;
+    .quickbar img {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
         opacity: 0.9;
         transition: 0.2s;
     }
 
-    .insta-icon img:hover {
+    .quickbar img:hover {
         opacity: 1;
+        box-shadow: 0 0 12px rgba(255,200,120,0.6);
     }
 
     .wrapper {
         max-width: 900px;
         margin: 0 auto;
-        padding: 140px 20px 40px;
+        padding: 160px 20px 40px;
         position: relative;
         z-index: 2;
     }
 
-    h1, h2 {
-        color: var(--accent);
-    }
-
+    h1, h2 { color: var(--accent); }
     p { line-height: 1.6; }
 
     /* SLIDESHOW */
@@ -174,31 +167,24 @@
         z-index: 9999;
         display: none;
     }
-
-    @media (max-width: 900px) { .slideshow-container { height: 450px; } }
-    @media (max-width: 600px) {
-        .slideshow-container { height: 300px; }
-        .prev, .next { font-size: 18px; padding: 10px; }
-        .fullscreen-close { font-size: 26px; padding: 6px 10px; }
-    }
 </style>
 </head>
 
 <body>
 
+<!-- QUICKBAR WORDT AUTOMATISCH INGEVOEGD -->
+<div id="quickbar-container"></div>
+
+<script>
+fetch("quickbar.html")
+    .then(r => r.text())
+    .then(html => {
+        document.getElementById("quickbar-container").innerHTML = html;
+    });
+</script>
+
 <!-- Onzichtbare H1 voor SEO -->
 <h1 style="position:absolute; left:-9999px;">Miniatuur Theater M8 – Helstone</h1>
-
-<header class="nav-header">
-    <a href="index.html" class="nav-link">Home</a>
-    <a href="projecten.html" class="nav-link">Projecten</a>
-    <div class="nav-follow">
-        <span>Volg ons op:</span>
-        <a href="https://www.instagram.com/creatieftechniek" target="_blank" class="insta-icon">
-            <img src="instagram.png" alt="Instagram Creatief Techniek">
-        </a>
-    </div>
-</header>
 
 <div class="wrapper">
 
@@ -210,14 +196,12 @@
 </p>
 
 <h2>Mijn bijdrage</h2>
-<p>
-   Ik was verantwoordelijk voor een aantal cruciale onderdelen binnen de installatie:
-</p>
+<p>Ik was verantwoordelijk voor een aantal cruciale onderdelen binnen de installatie:</p>
 
 <ul>
     <li>Ik ontwierp en produceerde <strong>3D‑geprinte stoeltjes</strong></li>
     <li>Het creëren van een <strong>perspectief‑opbouw</strong> voor optische diepte</li>
-    <li>Technische montage, van de 3D stoeltjes en schaalverdelig </li>
+    <li>Technische montage van stoeltjes en schaalverdeling</li>
 </ul>
 
 <p>
@@ -231,7 +215,7 @@
     <li><strong>Mathieu Wijdeven</strong> – onderzoek, concept en maker</li>
     <li><strong>Pim Kraan</strong> – constructie & technisch installatiewerk & detailafwerking</li>
     <li><strong>Peter Leeuwenburgh</strong> – Technisch producent</li>
-    <li><strong>“Gertjan Ruigrok”</strong> – 3D‑print, perspectiefopbouw & technische ondersteuning</li>
+    <li><strong>Gertjan Ruigrok</strong> – 3D‑print, perspectiefopbouw & technische ondersteuning</li>
 </ul>
 
 <h2>Foto’s</h2>
@@ -240,20 +224,20 @@
 
 <div class="slideshow-container" onclick="openFullscreen(this)">
 
-    <div class="slide"><img src="helstone1.jpg" alt="Miniatuurtheater M8 Helstone – technisch detail"></div>
-    <div class="slide"><img src="helstone2.jpg" alt="Miniatuurtheater M8 Helstone – perspectiefopbouw"></div>
-    <div class="slide"><img src="helstone3.jpg" alt="Miniatuurtheater M8 Helstone – 3D‑geprinte stoeltjes"></div>
-    <div class="slide"><img src="helstone4.jpg" alt="Miniatuurtheater M8 Helstone – expositie bord"></div>
-    <div class="slide"><img src="helstone5.jpg" alt="Miniatuurtheater M8 Helstone – expositie"></div>
-    <div class="slide"><img src="helstone6.jpg" alt="Miniatuurtheater M8 Helstone – technisch 3d"></div>
-    <div class="slide"><img src="helstone7.jpg" alt="Miniatuurtheater M8 Helstone – detailfoto"></div>
-    <div class="slide"><img src="helstone8.jpg" alt="Miniatuurtheater M8 Helstone – constructie 3d"></div>
-    <div class="slide"><img src="helstone9.jpg" alt="Miniatuurtheater M8 Helstone – Thalia theater (Paramaribo)"></div>
-    <div class="slide"><img src="helstone10.jpg" alt="Miniatuurtheater M8 Helstone – opstelling"></div>
-    <div class="slide"><img src="helstone11.jpg" alt="Miniatuurtheater M8 Helstone – technische opbouw"></div>
-    <div class="slide"><img src="helstone12.jpg" alt="Miniatuurtheater M8 Helstone – schaalmodel"></div>
-    <div class="slide"><img src="helstone13.jpg" alt="Miniatuurtheater M8 Helstone – constructieve elementen"></div>
-    <div class="slide"><img src="helstone14.jpg" alt="Miniatuurtheater M8 Helstone – eindresultaat"></div>
+    <div class="slide"><img src="helstone1.jpg"></div>
+    <div class="slide"><img src="helstone2.jpg"></div>
+    <div class="slide"><img src="helstone3.jpg"></div>
+    <div class="slide"><img src="helstone4.jpg"></div>
+    <div class="slide"><img src="helstone5.jpg"></div>
+    <div class="slide"><img src="helstone6.jpg"></div>
+    <div class="slide"><img src="helstone7.jpg"></div>
+    <div class="slide"><img src="helstone8.jpg"></div>
+    <div class="slide"><img src="helstone9.jpg"></div>
+    <div class="slide"><img src="helstone10.jpg"></div>
+    <div class="slide"><img src="helstone11.jpg"></div>
+    <div class="slide"><img src="helstone12.jpg"></div>
+    <div class="slide"><img src="helstone13.jpg"></div>
+    <div class="slide"><img src="helstone14.jpg"></div>
 
     <a class="prev" onclick="event.stopPropagation(); plusSlides(-1)">❮</a>
     <a class="next" onclick="event.stopPropagation(); plusSlides(1)">❯</a>
@@ -274,6 +258,8 @@
     <span class="dot" onclick="currentSlide(12)"></span>
     <span class="dot" onclick="currentSlide(13)"></span>
     <span class="dot" onclick="currentSlide(14)"></span>
+</div>
+
 </div>
 
 <script>
@@ -329,14 +315,6 @@ document.addEventListener("fullscreenchange", () => {
     }
 });
 </script>
-
-<!-- Onzichtbaar SEO‑blok -->
-<section style="padding:20px; opacity:0.85;">
-    <h2 style="position:absolute; left:-9999px;">Technisch maatwerk – Miniatuur Theater M8 Helstone</h2>
-    <p style="font-size:0.01px; color:transparent;">
-        Creatief Techniek levert technisch maatwerk voor miniatuurtheaters, 3D‑printprojecten en constructieve installaties.
-    </p>
-</section>
 
 </body>
 </html>
