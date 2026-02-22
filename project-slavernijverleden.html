@@ -52,71 +52,58 @@
         pointer-events: none;
     }
 
-    .nav-header {
-        position: absolute;
-        top: 20px;
-        right: 20px;
+    /* QUICKBAR (CSS blijft staan) */
+    .quickbar {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
         display: flex;
-        align-items: center;
-        gap: 25px;
-        z-index: 50;
-    }
-
-    .nav-link {
-        color: var(--accent);
-        text-decoration: none;
-        font-weight: bold;
-        background: rgba(0,0,0,0.6);
-        padding: 10px 18px;
-        border-radius: 8px;
+        gap: 28px;
+        padding: 14px 26px;
+        background: rgba(0,0,0,0.55);
         border: 1px solid rgba(255,200,120,0.25);
-        transition: 0.2s;
+        border-radius: 16px;
+        backdrop-filter: blur(6px);
+        z-index: 1200;
     }
 
-    .nav-link:hover {
-        background: rgba(255,200,120,0.15);
-    }
-
-    .nav-follow {
+    .quickbar a {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: 10px;
+        text-decoration: none;
         color: var(--accent);
+        font-size: 15px;
         font-weight: bold;
     }
 
-    .insta-icon img {
-        width: 45px;
+    .quickbar img {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
         opacity: 0.9;
         transition: 0.2s;
     }
 
-    .insta-icon img:hover {
+    .quickbar img:hover {
         opacity: 1;
+        box-shadow: 0 0 12px rgba(255,200,120,0.6);
     }
 
     .wrapper {
         max-width: 900px;
         margin: 0 auto;
-        padding: 140px 20px 40px;
+        padding: 160px 20px 40px;
         position: relative;
         z-index: 2;
     }
 
-    h1 {
-        color: var(--accent);
-        margin-bottom: 20px;
-    }
+    h1 { color: var(--accent); margin-bottom: 20px; }
+    h2 { color: var(--accent); margin-top: 30px; }
+    p { line-height: 1.6; }
 
-    h2 {
-        color: var(--accent);
-        margin-top: 30px;
-    }
-
-    p {
-        line-height: 1.6;
-    }
-
+    /* Slideshow */
     .slideshow-container {
         position: relative;
         width: 100%;
@@ -129,18 +116,8 @@
         background: #000;
     }
 
-    .slide {
-        display: none;
-        width: 100%;
-        height: 100%;
-    }
-
-    .slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        background: #000;
-    }
+    .slide { display: none; width: 100%; height: 100%; }
+    .slide img { width: 100%; height: 100%; object-fit: contain; background: #000; }
 
     .prev, .next {
         position: absolute;
@@ -156,18 +133,11 @@
         z-index: 10;
     }
 
-    .prev:hover, .next:hover {
-        background: rgba(255,200,120,0.2);
-    }
-
+    .prev:hover, .next:hover { background: rgba(255,200,120,0.2); }
     .prev { left: 10px; }
     .next { right: 10px; }
 
-    .dots {
-        text-align: center;
-        margin-top: 12px;
-    }
-
+    .dots { text-align: center; margin-top: 12px; }
     .dot {
         cursor: pointer;
         height: 12px;
@@ -178,10 +148,7 @@
         display: inline-block;
         transition: background-color 0.3s;
     }
-
-    .active, .dot:hover {
-        background-color: var(--accent);
-    }
+    .active, .dot:hover { background-color: var(--accent); }
 
     .fullscreen-close {
         position: fixed;
@@ -197,25 +164,8 @@
         display: none;
     }
 
-    @media (max-width: 900px) {
-        .slideshow-container { height: 450px; }
-        .nav-header { top: 10px; right: 10px; gap: 15px; }
-        .nav-link { padding: 8px 14px; font-size: 14px; }
-        .insta-icon img { width: 32px; }
-    }
-
+    @media (max-width: 900px) { .slideshow-container { height: 450px; } }
     @media (max-width: 600px) {
-        .nav-header {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background: rgba(0,0,0,0.6);
-            padding: 8px 12px;
-            border-radius: 10px;
-            backdrop-filter: blur(4px);
-            gap: 10px;
-            z-index: 999;
-        }
         .slideshow-container { height: 300px; }
         .prev, .next { font-size: 18px; padding: 10px; }
         .fullscreen-close { font-size: 26px; padding: 6px 10px; }
@@ -228,19 +178,19 @@
 
 <body>
 
+<!-- QUICKBAR WORDT AUTOMATISCH INGEVOEGD -->
+<div id="quickbar-container"></div>
+
+<script>
+fetch("quickbar.html")
+    .then(r => r.text())
+    .then(html => {
+        document.getElementById("quickbar-container").innerHTML = html;
+    });
+</script>
+
 <!-- Onzichtbare H1 voor SEO -->
 <h1 style="position:absolute; left:-9999px;">Gesprek Slavernijverleden</h1>
-
-<header class="nav-header">
-    <a href="index.html" class="nav-link">Home</a>
-    <a href="projecten.html" class="nav-link">Projecten</a>
-    <div class="nav-follow">
-        <span>Volg ons op:</span>
-        <a href="https://www.instagram.com/creatieftechniek" target="_blank" class="insta-icon">
-            <img src="instagram.png" alt="Instagram Creatief Techniek">
-        </a>
-    </div>
-</header>
 
 <div class="wrapper">
 
@@ -253,20 +203,18 @@
 
 <h2>Technische uitwerking van 3D‑modellen</h2>
 <p>
-    Ik ontving bestaande 3D‑modellen en heb deze technisch aangepast zodat ze constructietechnisch haalbaar en geschikt voor 3D‑print werden.  
-    Dit bestond uit het opschonen van modellen, het corrigeren van technische fouten en het printbaar maken van onderdelen.
+    Ik ontving bestaande 3D‑modellen en heb deze technisch aangepast zodat ze constructietechnisch haalbaar en geschikt voor 3D‑print werden.
 </p>
 
 <h2>Montageconstructies & verbindingen</h2>
 <p>
     Naast het 3D‑werk dacht ik mee over de montageconstructies.  
-    Ik werkte oplossingen uit voor verbindingen tussen objecten en panelen, met aandacht voor stevigheid, eenvoud in montage en een nette, onzichtbare afwerking.
+    Ik werkte oplossingen uit voor verbindingen tussen objecten en panelen.
 </p>
 
 <h2>Technische uitvoering & praktische oplossingen</h2>
 <p>
-    Tijdens de opbouw op locatie hielp ik met het vinden van praktische, technische oplossingen.  
-    Sommige onderdelen vroegen om improvisatie, andere om precisie — in beide gevallen zorgde ik ervoor dat alles paste, werkte en betrouwbaar gemonteerd kon worden.
+    Tijdens de opbouw op locatie hielp ik met het vinden van praktische, technische oplossingen.
 </p>
 
 <h2>Foto’s</h2>
@@ -275,17 +223,17 @@
 
 <div class="slideshow-container" onclick="openFullscreen(this)">
 
-    <div class="slide"><img src="slavernij1.jpg" alt="Gesprek Slavernijverleden – technisch detail"></div>
-    <div class="slide"><img src="slavernij2.jpg" alt="Gesprek Slavernijverleden – 3D‑model aanpassing"></div>
-    <div class="slide"><img src="slavernij3.jpg" alt="Gesprek Slavernijverleden – montageconstructie"></div>
-    <div class="slide"><img src="slavernij4.jpg" alt="Gesprek Slavernijverleden – technische verbindingen"></div>
-    <div class="slide"><img src="slavernij5.jpg" alt="Gesprek Slavernijverleden – constructiedetail"></div>
-    <div class="slide"><img src="slavernij6.jpg" alt="Gesprek Slavernijverleden – technische uitvoering"></div>
-    <div class="slide"><img src="slavernij7.jpg" alt="Gesprek Slavernijverleden – montageproces"></div>
-    <div class="slide"><img src="slavernij8.jpg" alt="Gesprek Slavernijverleden – detailfoto"></div>
-    <div class="slide"><img src="slavernij9.jpg" alt="Gesprek Slavernijverleden – constructie op locatie"></div>
-    <div class="slide"><img src="slavernij10.jpg" alt="Gesprek Slavernijverleden – technische afwerking"></div>
-    <div class="slide"><img src="slavernij11.jpg" alt="Gesprek Slavernijverleden – eindresultaat installatie"></div>
+    <div class="slide"><img src="slavernij1.jpg"></div>
+    <div class="slide"><img src="slavernij2.jpg"></div>
+    <div class="slide"><img src="slavernij3.jpg"></div>
+    <div class="slide"><img src="slavernij4.jpg"></div>
+    <div class="slide"><img src="slavernij5.jpg"></div>
+    <div class="slide"><img src="slavernij6.jpg"></div>
+    <div class="slide"><img src="slavernij7.jpg"></div>
+    <div class="slide"><img src="slavernij8.jpg"></div>
+    <div class="slide"><img src="slavernij9.jpg"></div>
+    <div class="slide"><img src="slavernij10.jpg"></div>
+    <div class="slide"><img src="slavernij11.jpg"></div>
 
     <a class="prev" onclick="event.stopPropagation(); plusSlides(-1)">❮</a>
     <a class="next" onclick="event.stopPropagation(); plusSlides(1)">❯</a>
@@ -360,14 +308,6 @@ document.addEventListener("fullscreenchange", () => {
     }
 });
 </script>
-
-<!-- Onzichtbaar SEO‑blok -->
-<section style="padding:20px; opacity:0.85;">
-    <h2 style="position:absolute; left:-9999px;">Technisch maatwerk – Gesprek Slavernijverleden</h2>
-    <p style="font-size:0.01px; color:transparent;">
-        Creatief Techniek levert technisch maatwerk voor installaties, 3D‑modellen, montageconstructies en constructieve oplossingen.
-    </p>
-</section>
 
 </body>
 </html>
