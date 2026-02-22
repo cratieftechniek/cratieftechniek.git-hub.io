@@ -25,7 +25,7 @@
         left: -9999px;
     }
 
-    /* QUICKBAR */
+    /* QUICKBAR (stijl blijft hier staan!) */
     .quickbar {
         position: fixed;
         top: 10px;
@@ -71,9 +71,9 @@
         height: 100vh;
         background: url('achtergrond.jpg') center/cover no-repeat fixed;
         display: flex;
-        justify-content: flex-end; /* BLOK NAAR RECHTS */
+        justify-content: flex-end;
         align-items: center;
-        padding-right: 80px; /* AFSTAND VAN RECHTERKANT */
+        padding-right: 80px;
         box-sizing: border-box;
         text-align: left;
     }
@@ -120,7 +120,7 @@
         font-size: 18px;
     }
 
-    /* MOBIEL – BLOK IN HET MIDDEN */
+    /* MOBIEL */
     @media (max-width: 600px) {
 
         body {
@@ -142,7 +142,7 @@
         }
 
         .hero {
-            justify-content: center; /* MIDDEN */
+            justify-content: center;
             align-items: center;
             padding: 20px;
             text-align: center;
@@ -172,28 +172,16 @@
 
 <body>
 
-<!-- QUICKBAR -->
-<div class="quickbar">
-    <a href="index.html">
-        <img src="home.png" alt="Home">
-        <span>Home</span>
-    </a>
+<!-- QUICKBAR WORDT HIER INGEVOEGD -->
+<div id="quickbar-container"></div>
 
-    <a href="projecten.html">
-        <img src="projecten.png" alt="Projecten">
-        <span>Projecten</span>
-    </a>
-
-    <a href="https://www.instagram.com/creatieftechniek" target="_blank">
-        <img src="instagram.png" alt="Instagram">
-        <span>Instagram</span>
-    </a>
-
-    <a href="https://www.linkedin.com/company/111640182" target="_blank">
-        <img src="linkedin.png" alt="LinkedIn">
-        <span>LinkedIn</span>
-    </a>
-</div>
+<script>
+    fetch("quickbar.html")
+        .then(r => r.text())
+        .then(html => {
+            document.getElementById("quickbar-container").innerHTML = html;
+        });
+</script>
 
 <h1>Creatief Techniek – Creatief technisch maatwerk</h1>
 
