@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0""")/>>
+<title>3D Print Calculator | Creatief Techniek</title>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+
+<style>
+:root{
+    --primary:#0f2a44;
+    --accent:#007bff;
+    --light:#f4f6f9;
+    --white:#ffffff;
+    --gray:#777;
+    --success:#28a745;
+}
+
+body{
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background:var(--light);
+    color:#222;
+}
+
+header{
+    background:var(--primary);
+    color:white;
+    padding:1.5rem;
+    text-align:center;
+    font-size:1.6rem;
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:2rem 1rem;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:2rem;
+}
+
+@media(min-width:900px){
+    .grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:1.5rem;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+h2{
+    margin-top:0;
+    color:var(--primary);
+}
+
+label{
+    display:block;
+    font-weight:600;
+    margin-top:1rem;
+}
+
+input,select{
+    width:100%;
+    padding:0.6rem;
+    margin-top:0.4rem;
+    border-radius:6px;
+    border:1px solid #ccc;
+    font-size:0.95rem;
+}
+
+input:focus,select:focus{
+    outline:none;
+    border-color:var(--accent);
+}
+
+button, .btn{
+    margin-top:1.5rem;
+    display:block;
+    width:100%;
+    padding:0.9rem;
+    background:var(--accent);
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:1rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    text-align:center;
+    text-decoration:none;
+}
+
+button:hover,.btn:hover{
+    background:#0056b3;
+    transform:translateY(-2px);
+}
+
+.price-box{
+    margin-top:1.5rem;
+    padding:1rem;
+    background:#f8f9fc;
+    border-radius:8px;
+}
+
+.price{
+    font-size:1.6rem;
+    font-weight:700;
+    color:var(--primary);
+}
+
+.old-price{
+    text-decoration:line-through;
+    color:red;
+    margin-right:8px;
+}
+
+.discount{
+    color:red;
+    font-weight:bold;
+}
+
+#viewer-container{
+    width:100%;
+    height:500px;
+    border-radius:10px;
+    overflow:hidden;
+    background:#fff;
+    border:1px solid #ddd;
+}
+
+small{
+    color:var(--gray);
+}
+
+footer{
+    text-align:center;
+    padding:2rem 1rem;
+    font-size:0.9rem;
+    color:var(--gray);
+}
+</style>
+</head>
+<body>
+
+<header>
+3D Print Calculator – Creatief Techniek
+</header>
+
+<div class="container">
+<div class="grid">
+
+<div class="card">
+<h2>Offerte Instellingen</h2>
+
+<label>Upload STL bestand</label>
+<input id="fileInput" type="file" accept=".stl" />
+<div id="fileName"></div>
+<div id="error" style="color:red;"></div>
+
+<label>Materiaal</label>
+<select id="material"></select>
+
+<label>Kleur</label>
+<select id="color">
+    <!-- Alleen de keuze Zwart -->
+    <option value="Zwart">Zwart</option>
+</select>
+
+<label>Aantal</label>
+<input id="quantity" type="number" min="1" value="1""")/>>
+
+<div class="price-box">
+<div id="output">Upload een STL om de prijs te berekenen.</div>
+</div>
+
+<a id="emailButton" class="btn" href="#" target="_top">
+Vraag Offerte Aan
+</a>
+
+<small>
+Let op: Voeg het STL-bestand handmatig toe aan de e-mail.
+</small>
+
+</div>
+
+<div class="card">
+<h2>3D Model Viewer</h2>
+<div id="viewer-container"></div>
+</div>
+
+</div>
+</div>
+
+<footer>
+© 2026 Creatief Techniek – Professionele 3D Prints
+</footer>
+
+<script>
+// ------- Calculator Logica -------
+
+const colorMap = {
+    "Zwart": 0x333333
+};
+
+const startPrice = 5.00;
+
+const materialPricing = {
+    PLA:{pricePerCM3:0.06},
+    PETG:{pricePerCM3:0.08},
+    TPU:{pricePerCM3:0.12}
+};
+
+const fileInput = document.getElementById("fileInput");
+const materialSelect = document.getElementById("material");
+const colorSelect = document.getElementById("color");
+const qtyInput = document.getElementById("quantity");
+const outputDiv = document.getElementById("output");
+const emailButton = document.getElementById("emailButton");
+const fileNameDiv = document.getElementById("fileName");
+
+for(let m in materialPricing){
+    let o=document.createElement("option");
+    o.value=m;
+    o.textContent=m;
+    materialSelect.appendChild(o);
+}
+
+let currentVolume=null;
+
+fileInput.addEventListener("change",async(e)=>{
+    const file=e.target.files[0];
+    if(!file)return;
+    fileNameDiv.textContent="Bestand: "+file.name;
+    const buffer=await file.arrayBuffer();
+    currentVolume=parseSTL(buffer);
+    loadSTLIntoViewer(buffer,colorSelect.value);
+    updatePrice();
+});
+
+qtyInput.addEventListener("input",updatePrice);
+materialSelect.addEventListener("change",updatePrice);
+colorSelect.addEventListener("change",()=>{
+    updateViewerColor(colorSelect.value);
+    updatePrice();
+});
+
+function updatePrice(){
+    if(!currentVolume){
+        outputDiv.innerHTML="Upload een STL om prijs te berekenen.";
+        return;
+    }
+
+    const cm3=currentVolume/1000;
+    const mat=materialSelect.value;
+    const clr=colorSelect.value;
+    const qty=parseInt(qtyInput.value)||1;
+    const base= startPrice + cm3*materialPricing[mat].pricePerCM3;
+    const total=base*qty;
+
+    let discount=0;
+    if(qty>=10)discount=0.15;
+    else if(qty>=5)discount=0.10;
+    else if(qty>=2)discount=0.05;
+
+    const final=total*(1-discount);
+
+    let html=`Volume: ${cm3.toFixed(2)} cm³<br>`;
+    if(discount>0){
+        html+=`<span class="old-price">€${total.toFixed(2)}</span>
+        <span class="price">€${final.toFixed(2)}</span>
+        <div class="discount">${discount*100}% korting</div>`;
+    }else{
+        html+=`<div class="price">€${total.toFixed(2)}</div>`;
+    }
+
+    outputDiv.innerHTML=html;
+
+    // Email link inclusief Materiaal en Kleur
+    emailButton.href=`mailto:creatietechniek@://hotmail.com 3D Print&body=Beste Creatief Techniek,%0D%0A%0D%0AIk ontvang graag een offerte voor het volgende model:%0D%0A- Materiaal: ${mat}%0D%0A- Kleur: ${clr}%0D%0A- Aantal: ${qty}%0D%0A- Volume: ${cm3.toFixed(2)} cm3%0D%0A- Prijsindicatie: €${final.toFixed(2)}%0D%0A%0D%0A(Vergeet niet het STL bestand bij te voegen aan de e-mail.)`;
+}
+
+// ------- STL Parser -------
+
+function parseSTL(buffer){
+    const view=new DataView(buffer);
+    const triCount=view.getUint32(80,true);
+    let offset=84;
+    let volume=0;
+
+    function signedVolume(p1,p2,p3){
+        return (p1[0]*(p2[1]*p3[2]-p2[2]*p3[1]) -
+                p1[1]*(p2[0]*p3[2]-p2[2]*p3[0]) +
+                p1[2]*(p2[0]*p3[1]-p2[1]*p3[0]))/6;
+    }
+
+    for(let i=0;i<triCount;i++){
+        offset+=12;
+        let v=[];
+        for(let j=0;j<3;j++){
+            v.push([
+                view.getFloat32(offset,true),
+                view.getFloat32(offset+4,true),
+                view.getFloat32(offset+8,true)
+            ]);
+            offset+=12;
+        }
+        offset+=2;
+        volume+=signedVolume(v[0],v[1],v[2]);
+    }
+    return Math.abs(volume);
+}
+
+// ------- 3D Viewer -------
+
+let scene=new THREE.Scene();
+scene.background=new THREE.Color(0xffffff);
+
+let camera=new THREE.PerspectiveCamera(60,1,0.1,2000);
+camera.position.set(100,100,100);
+
+let renderer=new THREE.WebGLRenderer({antialias:true});
+const container=document.getElementById("viewer-container");
+renderer.setSize(container.clientWidth,container.clientHeight);
+container.appendChild(renderer.domElement);
+
+let controls=new THREE.OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true;
+
+scene.add(new THREE.AmbientLight(0x888888));
+let light=new THREE.DirectionalLight(0xffffff,1);
+light.position.set(100,100,100);
+scene.add(light);
+
+let mesh;
+
+function loadSTLIntoViewer(buffer,colorName){
+    const loader=new THREE.STLLoader();
+    const geometry=loader.parse(buffer);
+    
+    // Model Centreren
+    geometry.center(); 
+    
+    if(mesh)scene.remove(mesh);
+    mesh=new THREE.Mesh(
+        geometry,
+        new THREE.MeshPhongMaterial({color:colorMap[colorName]})
+    );
+    scene.add(mesh);
+
+    // Zoom camera automatisch naar het model
+    geometry.computeBoundingSphere();
+    const radius = geometry.boundingSphere.radius;
+    camera.position.set(radius * 2, radius * 2, radius * 2);
+}
+
+function updateViewerColor(colorName){
+    if(mesh)mesh.material.color.setHex(colorMap[colorName]);
+}
+
+function animate(){
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene,camera);
+}
+animate();
+</script>
+
+</body>
+</html>
