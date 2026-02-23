@@ -13,14 +13,14 @@
 <style>
 :root { --accent: #f5d08a; }
 
-/* --- Achtergrond --- */
+/* --- Achtergrond zoals projecten.html --- */
 body {
     margin: 0;
     background: #000;
     color: #fff;
     font-family: Arial, sans-serif;
     position: relative;
-    padding-top: 160px;
+    padding-top: 160px; /* ruimte voor quickbar */
 }
 
 body::before {
@@ -29,9 +29,10 @@ body::before {
     inset: 0;
     background: radial-gradient(circle at top left, rgba(255,200,120,0.18), transparent 70%);
     z-index: -1;
+    pointer-events: none;
 }
 
-/* --- QUICKBAR --- */
+/* --- QUICKBAR (exact zoals projecten.html) --- */
 .quickbar {
     position: fixed;
     top: 10px;
@@ -102,6 +103,7 @@ input, select {
     font-weight: bold;
 }
 
+/* Dropdown opties — GOUD & ZWART */
 select option {
     background: #000;
     color: var(--accent);
@@ -127,9 +129,8 @@ select option {
     width: 100%;
     height: 500px;
     border-radius: 10px;
-    background: #181818; /* LICHTER */
+    background: #111;
     border: 1px solid rgba(255,255,255,0.15);
-    box-shadow: 0 0 40px rgba(255,255,255,0.12); /* SUBTIELE GLOW */
 }
 
 .price {
@@ -153,13 +154,16 @@ select option {
         gap: 10px;
         padding: 8px 12px;
     }
+
     .quickbar img {
         width: 34px;
         height: 34px;
     }
+
     .quickbar span {
         font-size: 11px;
     }
+
     body {
         padding-top: 130px;
     }
@@ -169,7 +173,7 @@ select option {
 
 <body>
 
-<!-- QUICKBAR -->
+<!-- QUICKBAR wordt automatisch geladen -->
 <div id="quickbar-container"></div>
 
 <script>
@@ -344,10 +348,10 @@ function parseSTL(buffer){
 
 /* --- 3D viewer --- */
 let scene=new THREE.Scene();
-scene.background=new THREE.Color(0x181818); /* LICHTER */
+scene.background=new THREE.Color(0x111111);
 
 let camera=new THREE.PerspectiveCamera(60,1,0.1,2000);
-camera.position.set(120,120,120);
+camera.position.set(100,100,100);
 
 let renderer=new THREE.WebGLRenderer({antialias:true});
 const container=document.getElementById("viewer-container");
@@ -357,16 +361,10 @@ container.appendChild(renderer.domElement);
 let controls=new THREE.OrbitControls(camera,renderer.domElement);
 controls.enableDamping=true;
 
-/* LICHT VERBETERD */
-scene.add(new THREE.AmbientLight(0x999999)); /* MEER AMBIENT */
-let light=new THREE.DirectionalLight(0xffffff,1.2);
-light.position.set(150,200,150);
+scene.add(new THREE.AmbientLight(0x888888));
+let light=new THREE.DirectionalLight(0xffffff,1);
+light.position.set(100,100,100);
 scene.add(light);
-
-/* RIM LIGHT */
-let rim=new THREE.DirectionalLight(0xffffff,0.4);
-rim.position.set(-200,-100,-150);
-scene.add(rim);
 
 let mesh;
 
@@ -380,6 +378,27 @@ function loadSTLIntoViewer(buffer,colorName){
 
     mesh=new THREE.Mesh(
         geometry,
-        new THREE.MeshPhongMaterial({
-            color:colorMap[colorName],
-            shininess:60
+        new THREE.MeshPhongMaterial({color:colorMap[colorName]})
+    );
+
+    scene.add(mesh);
+
+    geometry.computeBoundingSphere();
+    const radius=geometry.boundingSphere.radius;
+    camera.position.set(radius*2,radius*2,radius*2);
+}
+
+function updateViewerColor(colorName){
+    if(mesh)mesh.material.color.setHex(colorMap[colorName]);
+}
+
+function animate(){
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene,camera);
+}
+animate();
+</script>
+
+</body>
+</html>
