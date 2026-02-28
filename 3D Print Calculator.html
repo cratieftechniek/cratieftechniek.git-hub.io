@@ -110,6 +110,24 @@ select option {
     font-weight: bold;
 }
 
+/* Regenboog tekst */
+.rainbow-option {
+    background: linear-gradient(
+        to right,
+        red,
+        orange,
+        yellow,
+        green,
+        cyan,
+        blue,
+        violet
+    );
+    -webkit-background-clip: text;
+    color: transparent !important;
+    font-weight: bold;
+    pointer-events: none;
+}
+
 /* Button */
 .btn {
     margin-top: 20px;
@@ -202,6 +220,7 @@ fetch("quickbar.html")
     <label>Kleur</label>
     <select id="color">
         <option value="Zwart">Zwart</option>
+        <option disabled class="rainbow-option">Andere kleuren op aanvraag</option>
     </select>
 
     <label>Aantal</label>
@@ -349,7 +368,7 @@ function parseSTL(buffer){
 
 /* --- 3D viewer --- */
 let scene=new THREE.Scene();
-scene.background=new THREE.Color(0xf2f2f2); /* bijna wit */
+scene.background=new THREE.Color(0xf2f2f2);
 
 let camera=new THREE.PerspectiveCamera(60,1,0.1,2000);
 camera.position.set(100,100,100);
@@ -357,7 +376,6 @@ camera.position.set(100,100,100);
 let renderer=new THREE.WebGLRenderer({antialias:true});
 const container=document.getElementById("viewer-container");
 
-/* Renderer pas initialiseren als layout klaar is */
 function initRenderer() {
     const w = container.clientWidth || 500;
     const h = container.clientHeight || 400;
@@ -369,7 +387,6 @@ window.addEventListener("load", initRenderer);
 let controls=new THREE.OrbitControls(camera,renderer.domElement);
 controls.enableDamping=true;
 
-/* Iets sterkere belichting */
 scene.add(new THREE.AmbientLight(0xcccccc));
 let light=new THREE.DirectionalLight(0xffffff,1.3);
 light.position.set(100,100,100);
