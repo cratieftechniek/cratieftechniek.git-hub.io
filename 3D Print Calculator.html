@@ -1,227 +1,6 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>3D Print Calculator – Creatief Techniek</title>
-
-<!-- THREE.js -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
-
-<style>
-:root { --accent: #f5d08a; }
-
-/* --- Achtergrond zoals projecten.html --- */
-body {
-    margin: 0;
-    background: #000;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    position: relative;
-    padding-top: 160px;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at top left, rgba(255,200,120,0.18), transparent 70%);
-    z-index: -1;
-    pointer-events: none;
-}
-
-/* --- QUICKBAR --- */
-.quickbar {
-    position: fixed;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 28px;
-    padding: 14px 26px;
-    background: rgba(0,0,0,0.55);
-    border: 1px solid rgba(255,200,120,0.25);
-    border-radius: 16px;
-    backdrop-filter: blur(6px);
-    z-index: 1200;
-}
-
-.quickbar a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: var(--accent);
-    font-size: 15px;
-    font-weight: bold;
-}
-
-.quickbar img {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    opacity: 0.9;
-    transition: 0.2s;
-}
-
-.quickbar img:hover {
-    opacity: 1;
-    box-shadow: 0 0 12px rgba(255,200,120,0.6);
-}
-
-/* --- Layout --- */
-.wrapper {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.card {
-    background: rgba(255,255,255,0.05);
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.15);
-    backdrop-filter: blur(4px);
-    margin-bottom: 30px;
-}
-
-h1, h2 {
-    color: var(--accent);
-}
-
-/* Inputs */
-input, select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 6px;
-    border-radius: 6px;
-    border: 1px solid rgba(255,200,120,0.35);
-    background: rgba(0,0,0,0.55);
-    color: var(--accent);
-    font-weight: bold;
-}
-
-/* Dropdown opties */
-select option {
-    background: #000;
-    color: var(--accent);
-    font-weight: bold;
-}
-
-/* Button */
-.btn {
-    margin-top: 20px;
-    display: block;
-    width: 100%;
-    padding: 12px;
-    background: var(--accent);
-    color: #000;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-/* Viewer – bijna wit */
-#viewer-container {
-    width: 100%;
-    height: 500px;
-    min-height: 300px;
-    border-radius: 10px;
-    background: #f2f2f2;
-    border: 1px solid rgba(0,0,0,0.15);
-}
-
-.price {
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: var(--accent);
-}
-
-.old-price {
-    text-decoration: line-through;
-    color: red;
-}
-
-.discount {
-    color: red;
-    font-weight: bold;
-}
-
-@media (max-width: 600px) {
-    .quickbar {
-        gap: 10px;
-        padding: 8px 12px;
-    }
-
-    .quickbar img {
-        width: 34px;
-        height: 34px;
-    }
-
-    .quickbar span {
-        font-size: 11px;
-    }
-
-    body {
-        padding-top: 130px;
-    }
-}
-</style>
-</head>
-
-<body>
-
-<!-- QUICKBAR wordt automatisch geladen -->
-<div id="quickbar-container"></div>
-
-<script>
-fetch("quickbar.html")
-    .then(r => r.text())
-    .then(html => {
-        document.getElementById("quickbar-container").innerHTML = html;
-    });
-</script>
-
-<div class="wrapper">
-
-<h1>3D Print Calculator</h1>
-
-<div class="card">
-    <h2>Offerte Instellingen</h2>
-
-    <label>Upload 3D-bestand (STL, STEP, OBJ, 3MF, SKP)</label>
-    <input id="fileInput" type="file" accept=".stl,.step,.stp,.obj,.3mf,.skp">
-    <div id="fileName"></div>
-
-    <label>Materiaal</label>
-    <select id="material"></select>
-
-    <label>Kleur</label>
-    <select id="color">
-        <option value="Zwart">Zwart</option>
-    </select>
-
-    <label>Aantal</label>
-    <input id="quantity" type="number" min="1" value="1">
-
-    <div id="output" style="margin-top:20px;">Upload een 3D-bestand om de prijs te berekenen (nu volledig voor STL).</div>
-
-    <a id="emailButton" class="btn" href="#">Vraag Offerte Aan</a>
-</div>
-
-<div class="card">
-    <h2>3D Model Viewer</h2>
-    <div id="viewer-container"></div>
-</div>
-
-</div>
-
 <script>
 /* --- Kleur --- */
-const colorMap = { "Zwart": 0x777777 }; /* lichtgrijs */
+const colorMap = { "Zwart": 0x777777 };
 
 /* --- Prijsinstellingen --- */
 const startPrice = 5.00;
@@ -251,33 +30,114 @@ for(let m in materialPricing){
 let currentVolume=null;
 
 /* --- Upload meerdere bestandstypen --- */
-fileInput.addEventListener("change",async(e)=>{
-    const file=e.target.files[0];
-    if(!file)return;
+fileInput.addEventListener("change", async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
 
-    fileNameDiv.textContent="Bestand: "+file.name;
-
+    fileNameDiv.textContent = "Bestand: " + file.name;
     const ext = file.name.split(".").pop().toLowerCase();
 
-    if(ext === "stl"){
-        const buffer=await file.arrayBuffer();
-        currentVolume=parseSTL(buffer);
-        loadSTLIntoViewer(buffer,colorSelect.value);
-        updatePrice();
-    } else if (["step","stp","obj","3mf","skp"].includes(ext)) {
-        // Hier kun je later echte conversie naar STL toevoegen (STEP/SKP/OBJ/3MF → STL)
+    if (ext === "stl") {
+        const buffer = await file.arrayBuffer();
+        const geometry = new THREE.STLLoader().parse(buffer);
+        processGeometry(geometry);
+    }
+
+    else if (ext === "obj") {
+        const text = await file.text();
+        const obj = new THREE.OBJLoader().parse(text);
+        const geometry = obj.children[0].geometry;
+        processGeometry(geometry);
+    }
+
+    else if (ext === "3mf") {
+        const buffer = await file.arrayBuffer();
+        const model = new THREE.ThreeMFLoader().parse(buffer);
+        const geometry = model.children[0].geometry;
+        processGeometry(geometry);
+    }
+
+    else {
         currentVolume = null;
-        outputDiv.innerHTML =
-            "Bestandstype: <b>."+ext+"</b> is geüpload.<br>" +
-            "De viewer en prijsberekening werken nu alleen volledig voor STL-bestanden.<br>" +
-            "Voor dit type komt later automatische conversie naar STL.";
-    } else {
-        currentVolume = null;
-        outputDiv.innerHTML = "Dit bestandstype wordt nog niet ondersteund.";
+        outputDiv.innerHTML = "Dit bestandstype wordt niet ondersteund.";
     }
 });
 
-/* --- Events --- */
+/* --- Universele verwerking --- */
+function processGeometry(geometry) {
+    geometry.computeVertexNormals();
+    geometry.center();
+
+    loadGeometryIntoViewer(geometry);
+
+    currentVolume = calculateMeshVolume(geometry);
+    updatePrice();
+}
+
+/* --- Universele viewer --- */
+let scene=new THREE.Scene();
+scene.background=new THREE.Color(0xf2f2f2);
+
+let camera=new THREE.PerspectiveCamera(60,1,0.1,2000);
+camera.position.set(100,100,100);
+
+let renderer=new THREE.WebGLRenderer({antialias:true});
+const container=document.getElementById("viewer-container");
+
+function initRenderer() {
+    const w = container.clientWidth || 500;
+    const h = container.clientHeight || 400;
+    renderer.setSize(w, h);
+    container.appendChild(renderer.domElement);
+}
+window.addEventListener("load", initRenderer);
+
+let controls=new THREE.OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true;
+
+scene.add(new THREE.AmbientLight(0xcccccc));
+let light=new THREE.DirectionalLight(0xffffff,1.3);
+light.position.set(100,100,100);
+scene.add(light);
+
+let mesh;
+
+function loadGeometryIntoViewer(geometry) {
+    if (mesh) scene.remove(mesh);
+
+    mesh = new THREE.Mesh(
+        geometry,
+        new THREE.MeshPhongMaterial({ color: colorMap[colorSelect.value] })
+    );
+
+    scene.add(mesh);
+
+    geometry.computeBoundingSphere();
+    const r = geometry.boundingSphere.radius;
+    camera.position.set(r * 2, r * 2, r * 2);
+}
+
+function updateViewerColor(colorName){
+    if(mesh)mesh.material.color.setHex(colorMap[colorName]);
+}
+
+/* --- Volume berekening voor alle formaten --- */
+function calculateMeshVolume(geometry) {
+    let pos = geometry.attributes.position;
+    let volume = 0;
+
+    for (let i = 0; i < pos.count; i += 3) {
+        const p1 = new THREE.Vector3(pos.getX(i), pos.getY(i), pos.getZ(i));
+        const p2 = new THREE.Vector3(pos.getX(i+1), pos.getY(i+1), pos.getZ(i+1));
+        const p3 = new THREE.Vector3(pos.getX(i+2), pos.getY(i+2), pos.getZ(i+2));
+
+        volume += p1.dot(p2.cross(p3)) / 6;
+    }
+
+    return Math.abs(volume); // mm³
+}
+
+/* --- Prijsberekening --- */
 qtyInput.addEventListener("input",updatePrice);
 materialSelect.addEventListener("change",updatePrice);
 colorSelect.addEventListener("change",()=>{
@@ -285,10 +145,9 @@ colorSelect.addEventListener("change",()=>{
     updatePrice();
 });
 
-/* --- Prijsberekening --- */
 function updatePrice(){
     if(!currentVolume){
-        outputDiv.innerHTML="Upload een STL om prijs te berekenen. Andere types worden al geaccepteerd, maar nog niet omgerekend.";
+        outputDiv.innerHTML="Upload een STL, OBJ of 3MF om prijs te berekenen.";
         return;
     }
 
@@ -326,95 +185,10 @@ function updatePrice(){
         `- Kleur: ${clr}%0D%0A`+
         `- Aantal: ${qty}%0D%0A`+
         `- Volume: ${cm3.toFixed(2)} cm³%0D%0A%0D%0A`+
-        `- Prijsindicatie: €${final.toFixed(2)}%0D%0A%0D%0A`+
-        `STL-bestand wordt handmatig toegevoegd.`;
+        `- Prijsindicatie: €${final.toFixed(2)}%0D%0A%0D%0A`;
 }
 
-/* --- STL parser --- */
-function parseSTL(buffer){
-    const view=new DataView(buffer);
-    const triCount=view.getUint32(80,true);
-    let offset=84;
-    let volume=0;
-
-    function signedVolume(p1,p2,p3){
-        return (p1[0]*(p2[1]*p3[2]-p2[2]*p3[1]) -
-                p1[1]*(p2[0]*p3[2]-p2[2]*p3[0]) +
-                p1[2]*(p2[0]*p3[1]-p2[1]*p3[0]))/6;
-    }
-
-    for(let i=0;i<triCount;i++){
-        offset+=12;
-        let v=[];
-        for(let j=0;j<3;j++){
-            v.push([
-                view.getFloat32(offset,true),
-                view.getFloat32(offset+4,true),
-                view.getFloat32(offset+8,true)
-            ]);
-            offset+=12;
-        }
-        offset+=2;
-        volume+=signedVolume(v[0],v[1],v[2]);
-    }
-    return Math.abs(volume);
-}
-
-/* --- 3D viewer --- */
-let scene=new THREE.Scene();
-scene.background=new THREE.Color(0xf2f2f2); /* bijna wit */
-
-let camera=new THREE.PerspectiveCamera(60,1,0.1,2000);
-camera.position.set(100,100,100);
-
-let renderer=new THREE.WebGLRenderer({antialias:true});
-const container=document.getElementById("viewer-container");
-
-/* Renderer pas initialiseren als layout klaar is */
-function initRenderer() {
-    const w = container.clientWidth || 500;
-    const h = container.clientHeight || 400;
-    renderer.setSize(w, h);
-    container.appendChild(renderer.domElement);
-}
-window.addEventListener("load", initRenderer);
-
-let controls=new THREE.OrbitControls(camera,renderer.domElement);
-controls.enableDamping=true;
-
-/* Iets sterkere belichting */
-scene.add(new THREE.AmbientLight(0xcccccc));
-let light=new THREE.DirectionalLight(0xffffff,1.3);
-light.position.set(100,100,100);
-scene.add(light);
-
-let mesh;
-
-function loadSTLIntoViewer(buffer,colorName){
-    const loader=new THREE.STLLoader();
-    const geometry=loader.parse(buffer);
-
-    geometry.center();
-
-    if(mesh)scene.remove(mesh);
-
-    mesh=new THREE.Mesh(
-        geometry,
-        new THREE.MeshPhongMaterial({color:colorMap[colorName]})
-    );
-
-    scene.add(mesh);
-
-    geometry.computeBoundingSphere();
-    const radius=geometry.boundingSphere.radius;
-    camera.position.set(radius*2,radius*2,radius*2);
-}
-
-function updateViewerColor(colorName){
-    if(mesh)mesh.material.color.setHex(colorMap[colorName]);
-}
-
-/* Resize-fix */
+/* --- Render loop --- */
 window.addEventListener("resize", () => {
     const w = container.clientWidth || 500;
     const h = container.clientHeight || 400;
@@ -430,6 +204,3 @@ function animate(){
 }
 animate();
 </script>
-
-</body>
-</html>
