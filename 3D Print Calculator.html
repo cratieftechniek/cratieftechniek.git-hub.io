@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>3D Print Calculator | Creatief Techniek</title>
+<title>3D Print Calculator – Creatief Techniek</title>
 
 <!-- THREE.js -->
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
@@ -11,266 +11,227 @@
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
 
 <style>
-:root{
-    --primary:#0f2a44;
-    --accent:#007bff;
-    --light:#f4f6f9;
-    --white:#ffffff;
-    --gray:#777;
-    --success:#28a745;
+:root { --accent: #f5d08a; }
+
+/* --- Achtergrond zoals projecten.html --- */
+body {
+    margin: 0;
+    background: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    position: relative;
+    padding-top: 160px;
 }
 
-/* Achtergrond + ruimte voor quickbar */
-body{
-    margin:0;
-    font-family:'Segoe UI',sans-serif;
-    background:var(--light);
-    padding-top:90px;
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(255,200,120,0.18), transparent 70%);
+    z-index: -1;
+    pointer-events: none;
 }
 
-/* QUICKBAR */
-.quickbar{
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-    background:#ffffff;
-    border-bottom:1px solid #ddd;
-    padding:10px 0;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    z-index:9999;
+/* --- QUICKBAR --- */
+.quickbar {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 28px;
+    padding: 14px 26px;
+    background: rgba(0,0,0,0.55);
+    border: 1px solid rgba(255,200,120,0.25);
+    border-radius: 16px;
+    backdrop-filter: blur(6px);
+    z-index: 1200;
 }
 
-.quickbar a{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    text-decoration:none;
-    color:#333;
-    font-size:0.8rem;
+.quickbar a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--accent);
+    font-size: 15px;
+    font-weight: bold;
 }
 
-.quickbar img{
-    width:50px;
-    height:50px;
-    object-fit:contain;
-    margin-bottom:5px;
+.quickbar img {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    opacity: 0.9;
+    transition: 0.2s;
 }
 
-/* HEADER */
-header{
-    background:var(--primary);
-    color:white;
-    padding:1.5rem;
-    text-align:center;
-    font-size:1.6rem;
-    font-weight:600;
-    letter-spacing:1px;
+.quickbar img:hover {
+    opacity: 1;
+    box-shadow: 0 0 12px rgba(255,200,120,0.6);
 }
 
-/* LAYOUT */
-.container{
-    max-width:1100px;
-    margin:auto;
-    padding:2rem 1rem;
+/* --- Layout --- */
+.wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.grid{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:2rem;
+.card {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    margin-bottom: 30px;
 }
 
-@media(min-width:900px){
-    .grid{
-        grid-template-columns:1fr 1fr;
+h1, h2 {
+    color: var(--accent);
+}
+
+/* Inputs */
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,200,120,0.35);
+    background: rgba(0,0,0,0.55);
+    color: var(--accent);
+    font-weight: bold;
+}
+
+/* Dropdown opties */
+select option {
+    background: #000;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+/* Button */
+.btn {
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: var(--accent);
+    color: #000;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Viewer – bijna wit */
+#viewer-container {
+    width: 100%;
+    height: 500px;
+    min-height: 300px;
+    border-radius: 10px;
+    background: #f2f2f2;
+    border: 1px solid rgba(0,0,0,0.15);
+}
+
+.price {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: red;
+}
+
+.discount {
+    color: red;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .quickbar {
+        gap: 10px;
+        padding: 8px 12px;
     }
-}
 
-.card{
-    background:white;
-    border-radius:12px;
-    padding:1.5rem;
-    box-shadow:0 5px 20px rgba(0,0,0,0.08);
-}
+    .quickbar img {
+        width: 34px;
+        height: 34px;
+    }
 
-h2{
-    margin-top:0;
-    color:var(--primary);
-}
+    .quickbar span {
+        font-size: 11px;
+    }
 
-label{
-    display:block;
-    font-weight:600;
-    margin-top:1rem;
-}
-
-input,select{
-    width:100%;
-    padding:0.6rem;
-    margin-top:0.4rem;
-    border-radius:6px;
-    border:1px solid #ccc;
-    font-size:0.95rem;
-}
-
-button,.btn{
-    margin-top:1.5rem;
-    display:block;
-    width:100%;
-    padding:0.9rem;
-    background:var(--accent);
-    color:white;
-    border:none;
-    border-radius:8px;
-    font-size:1rem;
-    font-weight:600;
-    cursor:pointer;
-    transition:0.3s;
-    text-align:center;
-    text-decoration:none;
-}
-
-button:hover,.btn:hover{
-    background:#0056b3;
-    transform:translateY(-2px);
-}
-
-.price-box{
-    margin-top:1.5rem;
-    padding:1rem;
-    background:#f8f9fc;
-    border-radius:8px;
-}
-
-.price{
-    font-size:1.6rem;
-    font-weight:700;
-    color:var(--primary);
-}
-
-.old-price{
-    text-decoration:line-through;
-    color:red;
-    margin-right:8px;
-}
-
-.discount{
-    color:red;
-    font-weight:bold;
-}
-
-#viewer-container{
-    width:100%;
-    height:500px;
-    border-radius:10px;
-    overflow:hidden;
-    background:#fff;
-    border:1px solid #ddd;
-}
-
-footer{
-    text-align:center;
-    padding:2rem 1rem;
-    font-size:0.9rem;
-    color:var(--gray);
+    body {
+        padding-top: 130px;
+    }
 }
 </style>
 </head>
+
 <body>
 
-<!-- QUICKBAR -->
-<div class="quickbar">
-    <a href="index.html">
-        <img src="home.png" alt="Home">
-        <span>Home</span>
-    </a>
-
-    <a href="projecten.html">
-        <img src="projecten.png" alt="Projecten">
-        <span>Projecten</span>
-    </a>
-
-    <a href="3D Print Calculator.html">
-        <img src="3D.png" alt="3D Calculator">
-        <span>3D Calculator</span>
-    </a>
-
-    <a href="https://www.instagram.com/creatieftechniek" target="_blank">
-        <img src="instagram.png" alt="Instagram">
-        <span>Instagram</span>
-    </a>
-
-    <a href="https://www.linkedin.com/company/111640182" target="_blank">
-        <img src="linkedin.png" alt="LinkedIn">
-        <span>LinkedIn</span>
-    </a>
-</div>
-
-<header>
-3D Print Calculator – Creatief Techniek
-</header>
-
-<div class="container">
-<div class="grid">
-
-<!-- LINKERKOLOM -->
-<div class="card">
-<h2>Offerte Instellingen</h2>
-
-<label>Upload STL bestand</label>
-<input id="fileInput" type="file" accept=".stl" />
-<div id="fileName"></div>
-<div id="error" style="color:red;"></div>
-
-<label>Materiaal</label>
-<select id="material"></select>
-
-<label>Kleur</label>
-<select id="color">
-    <option value="Zwart">Zwart</option>
-</select>
-
-<label>Aantal</label>
-<input id="quantity" type="number" min="1" value="1">
-
-<div class="price-box">
-<div id="output">Upload een STL om de prijs te berekenen.</div>
-</div>
-
-<a id="emailButton" class="btn" href="#" target="_top">Vraag Offerte Aan</a>
-
-<small>Let op: Voeg het STL-bestand handmatig toe aan de e-mail.</small>
-</div>
-
-<!-- RECHTERKOLOM -->
-<div class="card">
-<h2>3D Model Viewer</h2>
-<div id="viewer-container"></div>
-</div>
-
-</div>
-</div>
-
-<footer>
-© 2026 Creatief Techniek – Professionele 3D Prints
-</footer>
+<!-- QUICKBAR wordt automatisch geladen -->
+<div id="quickbar-container"></div>
 
 <script>
-/* --- KLEUREN --- */
-const colorMap={"Zwart":0x333333};
+fetch("quickbar.html")
+    .then(r => r.text())
+    .then(html => {
+        document.getElementById("quickbar-container").innerHTML = html;
+    });
+</script>
 
-/* --- PRIJSINSTELLINGEN --- */
-const startPrice=5.00;
-const materialPricing={
+<div class="wrapper">
+
+<h1>3D Print Calculator</h1>
+
+<div class="card">
+    <h2>Offerte Instellingen</h2>
+
+    <label>Upload STL bestand</label>
+    <input id="fileInput" type="file" accept=".stl">
+    <div id="fileName"></div>
+
+    <label>Materiaal</label>
+    <select id="material"></select>
+
+    <label>Kleur</label>
+    <select id="color">
+        <option value="Zwart">Zwart</option>
+    </select>
+
+    <label>Aantal</label>
+    <input id="quantity" type="number" min="1" value="1">
+
+    <div id="output" style="margin-top:20px;">Upload een STL om de prijs te berekenen.</div>
+
+    <a id="emailButton" class="btn" href="#">Vraag Offerte Aan</a>
+</div>
+
+<div class="card">
+    <h2>3D Model Viewer</h2>
+    <div id="viewer-container"></div>
+</div>
+
+</div>
+
+<script>
+/* --- Kleur --- */
+const colorMap = { "Zwart": 0x777777 }; /* lichtgrijs */
+
+/* --- Prijsinstellingen --- */
+const startPrice = 5.00;
+const materialPricing = {
     PLA:{pricePerCM3:0.09},
     PETG:{pricePerCM3:0.12},
     TPU:{pricePerCM3:0.18}
 };
 
-/* --- ELEMENTEN --- */
+/* --- Elementen --- */
 const fileInput=document.getElementById("fileInput");
 const materialSelect=document.getElementById("material");
 const colorSelect=document.getElementById("color");
@@ -279,7 +240,7 @@ const outputDiv=document.getElementById("output");
 const emailButton=document.getElementById("emailButton");
 const fileNameDiv=document.getElementById("fileName");
 
-/* --- MATERIALEN LADEN --- */
+/* Materialen laden */
 for(let m in materialPricing){
     let o=document.createElement("option");
     o.value=m;
@@ -289,7 +250,7 @@ for(let m in materialPricing){
 
 let currentVolume=null;
 
-/* --- BESTAND UPLOAD --- */
+/* --- STL upload --- */
 fileInput.addEventListener("change",async(e)=>{
     const file=e.target.files[0];
     if(!file)return;
@@ -303,7 +264,7 @@ fileInput.addEventListener("change",async(e)=>{
     updatePrice();
 });
 
-/* --- EVENTS --- */
+/* --- Events --- */
 qtyInput.addEventListener("input",updatePrice);
 materialSelect.addEventListener("change",updatePrice);
 colorSelect.addEventListener("change",()=>{
@@ -311,7 +272,7 @@ colorSelect.addEventListener("change",()=>{
     updatePrice();
 });
 
-/* --- PRIJSBEREKENING --- */
+/* --- Prijsberekening --- */
 function updatePrice(){
     if(!currentVolume){
         outputDiv.innerHTML="Upload een STL om prijs te berekenen.";
@@ -351,12 +312,12 @@ function updatePrice(){
         `- Materiaal: ${mat}%0D%0A`+
         `- Kleur: ${clr}%0D%0A`+
         `- Aantal: ${qty}%0D%0A`+
-        `- Volume: ${cm3.toFixed(2)} cm³%0D%0A`+
+        `- Volume: ${cm3.toFixed(2)} cm³%0D%0A%0D%0A`+
         `- Prijsindicatie: €${final.toFixed(2)}%0D%0A%0D%0A`+
         `STL-bestand wordt handmatig toegevoegd.`;
 }
 
-/* --- STL PARSER --- */
+/* --- STL parser --- */
 function parseSTL(buffer){
     const view=new DataView(buffer);
     const triCount=view.getUint32(80,true);
@@ -386,23 +347,31 @@ function parseSTL(buffer){
     return Math.abs(volume);
 }
 
-/* --- 3D VIEWER --- */
+/* --- 3D viewer --- */
 let scene=new THREE.Scene();
-scene.background=new THREE.Color(0xffffff);
+scene.background=new THREE.Color(0xf2f2f2); /* bijna wit */
 
 let camera=new THREE.PerspectiveCamera(60,1,0.1,2000);
 camera.position.set(100,100,100);
 
 let renderer=new THREE.WebGLRenderer({antialias:true});
 const container=document.getElementById("viewer-container");
-renderer.setSize(container.clientWidth,container.clientHeight);
-container.appendChild(renderer.domElement);
+
+/* Renderer pas initialiseren als layout klaar is */
+function initRenderer() {
+    const w = container.clientWidth || 500;
+    const h = container.clientHeight || 400;
+    renderer.setSize(w, h);
+    container.appendChild(renderer.domElement);
+}
+window.addEventListener("load", initRenderer);
 
 let controls=new THREE.OrbitControls(camera,renderer.domElement);
 controls.enableDamping=true;
 
-scene.add(new THREE.AmbientLight(0x888888));
-let light=new THREE.DirectionalLight(0xffffff,1);
+/* Iets sterkere belichting */
+scene.add(new THREE.AmbientLight(0xcccccc));
+let light=new THREE.DirectionalLight(0xffffff,1.3);
 light.position.set(100,100,100);
 scene.add(light);
 
@@ -432,20 +401,21 @@ function updateViewerColor(colorName){
     if(mesh)mesh.material.color.setHex(colorMap[colorName]);
 }
 
+/* Resize-fix */
+window.addEventListener("resize", () => {
+    const w = container.clientWidth || 500;
+    const h = container.clientHeight || 400;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+});
+
 function animate(){
     requestAnimationFrame(animate);
     controls.update();
     renderer.render(scene,camera);
 }
 animate();
-
-window.addEventListener('resize', () => {
-    const width = container.clientWidth;
-    const height = container.clientHeight;
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-});
 </script>
 
 </body>
