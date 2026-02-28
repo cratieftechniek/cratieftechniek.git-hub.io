@@ -52,7 +52,6 @@
         pointer-events: none;
     }
 
-    /* QUICKBAR (CSS blijft staan) */
     .quickbar {
         position: fixed;
         top: 10px;
@@ -103,7 +102,6 @@
     h2 { color: var(--accent); margin-top: 30px; }
     p { line-height: 1.6; }
 
-    /* Slideshow */
     .slideshow-container {
         position: relative;
         width: 100%;
@@ -178,7 +176,6 @@
 
 <body>
 
-<!-- QUICKBAR WORDT AUTOMATISCH INGEVOEGD -->
 <div id="quickbar-container"></div>
 
 <script>
@@ -189,7 +186,6 @@ fetch("quickbar.html")
     });
 </script>
 
-<!-- Onzichtbare H1 voor SEO -->
 <h1 style="position:absolute; left:-9999px;">Gesprek Slavernijverleden</h1>
 
 <div class="wrapper">
@@ -200,6 +196,15 @@ fetch("quickbar.html")
     Voor het project <strong>Gesprek Slavernijverleden</strong> vervulde ik een technische rol binnen de realisatie van de installatie.  
     Mijn bijdrage lag vooral in het verbeteren en technisch uitvoerbaar maken van onderdelen die al ontworpen waren.
 </p>
+
+<!-- ⭐ OPTIE B – Toegevoegd blok -->
+<p>
+    Meer informatie over de maatschappelijke context van dit project is te vinden op 
+    <a href="https://gesprekslavernijverleden.nl" target="_blank" rel="noopener">gesprekslavernijverleden.nl</a> 
+    en in het 
+    <a href="https://www.rijksoverheid.nl/actueel/nieuws/2024/06/27/gespreksstarter-wie-zijn-wij-vergroot-kennis-over-slavernijverleden" target="_blank" rel="noopener">nieuwsbericht van de Rijksoverheid</a>.
+</p>
+<!-- ⭐ EINDE TOEVOEGING -->
 
 <h2>Technische uitwerking van 3D‑modellen</h2>
 <p>
@@ -234,7 +239,6 @@ fetch("quickbar.html")
 <div class="slide"><img src="img/slavernij/slavernij9.jpg"></div>
 <div class="slide"><img src="img/slavernij/slavernij10.jpg"></div>
 <div class="slide"><img src="img/slavernij/slavernij11.jpg"></div>
-
 
     <a class="prev" onclick="event.stopPropagation(); plusSlides(-1)">❮</a>
     <a class="next" onclick="event.stopPropagation(); plusSlides(1)">❯</a>
