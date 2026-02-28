@@ -192,8 +192,8 @@ fetch("quickbar.html")
 <div class="card">
     <h2>Offerte Instellingen</h2>
 
-    <label>Upload STL bestand</label>
-    <input id="fileInput" type="file" accept=".stl">
+    <label>Upload 3D-bestand (STL, STEP, OBJ, 3MF, SKP)</label>
+    <input id="fileInput" type="file" accept=".stl,.step,.stp,.obj,.3mf,.skp">
     <div id="fileName"></div>
 
     <label>Materiaal</label>
@@ -207,7 +207,7 @@ fetch("quickbar.html")
     <label>Aantal</label>
     <input id="quantity" type="number" min="1" value="1">
 
-    <div id="output" style="margin-top:20px;">Upload een STL om de prijs te berekenen.</div>
+    <div id="output" style="margin-top:20px;">Upload een 3D-bestand om de prijs te berekenen (nu volledig voor STL).</div>
 
     <a id="emailButton" class="btn" href="#">Vraag Offerte Aan</a>
 </div>
@@ -250,18 +250,31 @@ for(let m in materialPricing){
 
 let currentVolume=null;
 
-/* --- STL upload --- */
+/* --- Upload meerdere bestandstypen --- */
 fileInput.addEventListener("change",async(e)=>{
     const file=e.target.files[0];
     if(!file)return;
 
     fileNameDiv.textContent="Bestand: "+file.name;
 
-    const buffer=await file.arrayBuffer();
-    currentVolume=parseSTL(buffer);
+    const ext = file.name.split(".").pop().toLowerCase();
 
-    loadSTLIntoViewer(buffer,colorSelect.value);
-    updatePrice();
+    if(ext === "stl"){
+        const buffer=await file.arrayBuffer();
+        currentVolume=parseSTL(buffer);
+        loadSTLIntoViewer(buffer,colorSelect.value);
+        updatePrice();
+    } else if (["step","stp","obj","3mf","skp"].includes(ext)) {
+        // Hier kun je later echte conversie naar STL toevoegen (STEP/SKP/OBJ/3MF → STL)
+        currentVolume = null;
+        outputDiv.innerHTML =
+            "Bestandstype: <b>."+ext+"</b> is geüpload.<br>" +
+            "De viewer en prijsberekening werken nu alleen volledig voor STL-bestanden.<br>" +
+            "Voor dit type komt later automatische conversie naar STL.";
+    } else {
+        currentVolume = null;
+        outputDiv.innerHTML = "Dit bestandstype wordt nog niet ondersteund.";
+    }
 });
 
 /* --- Events --- */
@@ -275,7 +288,7 @@ colorSelect.addEventListener("change",()=>{
 /* --- Prijsberekening --- */
 function updatePrice(){
     if(!currentVolume){
-        outputDiv.innerHTML="Upload een STL om prijs te berekenen.";
+        outputDiv.innerHTML="Upload een STL om prijs te berekenen. Andere types worden al geaccepteerd, maar nog niet omgerekend.";
         return;
     }
 
