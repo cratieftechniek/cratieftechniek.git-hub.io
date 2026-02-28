@@ -1,8 +1,203 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Print Calculator – Creatief Techniek</title>
+
+<!-- THREE.js -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/3MFLoader.js"></script>
+
+<style>
+:root { --accent: #f5d08a; }
+
+body {
+    margin: 0;
+    background: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    position: relative;
+    padding-top: 160px;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(255,200,120,0.18), transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.quickbar {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 28px;
+    padding: 14px 26px;
+    background: rgba(0,0,0,0.55);
+    border: 1px solid rgba(255,200,120,0.25);
+    border-radius: 16px;
+    backdrop-filter: blur(6px);
+    z-index: 1200;
+}
+
+.quickbar a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--accent);
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.quickbar img {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    opacity: 0.9;
+    transition: 0.2s;
+}
+
+.quickbar img:hover {
+    opacity: 1;
+    box-shadow: 0 0 12px rgba(255,200,120,0.6);
+}
+
+.wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    margin-bottom: 30px;
+}
+
+h1, h2 {
+    color: var(--accent);
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,200,120,0.35);
+    background: rgba(0,0,0,0.55);
+    color: var(--accent);
+    font-weight: bold;
+}
+
+select option {
+    background: #000;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.btn {
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: var(--accent);
+    color: #000;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#viewer-container {
+    width: 100%;
+    height: 500px;
+    min-height: 300px;
+    border-radius: 10px;
+    background: #f2f2f2;
+    border: 1px solid rgba(0,0,0,0.15);
+}
+
+.price {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: red;
+}
+
+.discount {
+    color: red;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div id="quickbar-container"></div>
+
 <script>
-/* --- Kleur --- */
+fetch("quickbar.html")
+    .then(r => r.text())
+    .then(html => {
+        document.getElementById("quickbar-container").innerHTML = html;
+    });
+</script>
+
+<div class="wrapper">
+
+<h1>3D Print Calculator</h1>
+
+<div class="card">
+    <h2>Offerte Instellingen</h2>
+
+    <label>Upload 3D-bestand (STL, OBJ, 3MF)</label>
+    <input id="fileInput" type="file" accept=".stl,.obj,.3mf">
+    <div id="fileName"></div>
+
+    <label>Materiaal</label>
+    <select id="material"></select>
+
+    <label>Kleur</label>
+    <select id="color">
+        <option value="Zwart">Zwart</option>
+    </select>
+
+    <label>Aantal</label>
+    <input id="quantity" type="number" min="1" value="1">
+
+    <div id="output" style="margin-top:20px;">
+        Upload een STL, OBJ of 3MF om de prijs te berekenen.
+    </div>
+
+    <a id="emailButton" class="btn" href="#">Vraag Offerte Aan</a>
+</div>
+
+<div class="card">
+    <h2>3D Model Viewer</h2>
+    <div id="viewer-container"></div>
+</div>
+
+</div>
+
+<script>
 const colorMap = { "Zwart": 0x777777 };
 
-/* --- Prijsinstellingen --- */
 const startPrice = 5.00;
 const materialPricing = {
     PLA:{pricePerCM3:0.09},
@@ -10,7 +205,6 @@ const materialPricing = {
     TPU:{pricePerCM3:0.18}
 };
 
-/* --- Elementen --- */
 const fileInput=document.getElementById("fileInput");
 const materialSelect=document.getElementById("material");
 const colorSelect=document.getElementById("color");
@@ -19,7 +213,6 @@ const outputDiv=document.getElementById("output");
 const emailButton=document.getElementById("emailButton");
 const fileNameDiv=document.getElementById("fileName");
 
-/* Materialen laden */
 for(let m in materialPricing){
     let o=document.createElement("option");
     o.value=m;
@@ -29,7 +222,6 @@ for(let m in materialPricing){
 
 let currentVolume=null;
 
-/* --- Upload meerdere bestandstypen --- */
 fileInput.addEventListener("change", async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -63,7 +255,6 @@ fileInput.addEventListener("change", async (e) => {
     }
 });
 
-/* --- Universele verwerking --- */
 function processGeometry(geometry) {
     geometry.computeVertexNormals();
     geometry.center();
@@ -74,7 +265,6 @@ function processGeometry(geometry) {
     updatePrice();
 }
 
-/* --- Universele viewer --- */
 let scene=new THREE.Scene();
 scene.background=new THREE.Color(0xf2f2f2);
 
@@ -121,7 +311,6 @@ function updateViewerColor(colorName){
     if(mesh)mesh.material.color.setHex(colorMap[colorName]);
 }
 
-/* --- Volume berekening voor alle formaten --- */
 function calculateMeshVolume(geometry) {
     let pos = geometry.attributes.position;
     let volume = 0;
@@ -134,10 +323,9 @@ function calculateMeshVolume(geometry) {
         volume += p1.dot(p2.cross(p3)) / 6;
     }
 
-    return Math.abs(volume); // mm³
+    return Math.abs(volume);
 }
 
-/* --- Prijsberekening --- */
 qtyInput.addEventListener("input",updatePrice);
 materialSelect.addEventListener("change",updatePrice);
 colorSelect.addEventListener("change",()=>{
@@ -176,19 +364,8 @@ function updatePrice(){
     }
 
     outputDiv.innerHTML=html;
-
-    emailButton.href=
-        `mailto:creatieftechniek@hotmail.com?subject=Offerte 3D Print`+
-        `&body=Beste,%0D%0A%0D%0A`+
-        `Graag ontvang ik een offerte voor:%0D%0A`+
-        `- Materiaal: ${mat}%0D%0A`+
-        `- Kleur: ${clr}%0D%0A`+
-        `- Aantal: ${qty}%0D%0A`+
-        `- Volume: ${cm3.toFixed(2)} cm³%0D%0A%0D%0A`+
-        `- Prijsindicatie: €${final.toFixed(2)}%0D%0A%0D%0A`;
 }
 
-/* --- Render loop --- */
 window.addEventListener("resize", () => {
     const w = container.clientWidth || 500;
     const h = container.clientHeight || 400;
@@ -204,3 +381,6 @@ function animate(){
 }
 animate();
 </script>
+
+</body>
+</html>
